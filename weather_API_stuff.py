@@ -1,4 +1,3 @@
-
 import json, re, requests
 
 
@@ -14,9 +13,9 @@ long =11.9746
 date_pattern = r"\(20[0-9]{2})-(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])\b" # confirm if it is YYYY-MM-DD
 
 
-def get_average_temp(lat, long, start_date, end_date):
+def get_average_temp():
     try:   
-        weather = f"https://archive-api.open-meteo.com/v1/era5?latitude={lat}&longitude={long}&start_date={start_date}&end_date={end_date}&hourly=temperature_2m"
+        weather = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&past_days=7&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"
          
         response_weather = requests.get(weather)
         data_weather = response_weather.json()
@@ -29,20 +28,35 @@ def get_average_temp(lat, long, start_date, end_date):
     
     except: 
         ...
-#not working:
-def get_top_tracks():
-    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-    try:
-        playlist_id = ...
-        top_tracks = f"{service}//playlists/{playlist_id}"
-        response_top_tracks = requests.get(top_tracks)
-        data_top_tracks = response_top_tracks.json()
-        print(data_top_tracks)
+# relating temperature to genre
+'''
+def get_music_data(start_date, end_date):
+    # This function should fetch data from Spotify API to get popular tracks and their genres
+    # For demonstration, let's simulate some data
+    # You would replace this with an actual API call to Spotify
+    
+    # Sample data simulating genres and counts
+    genre_data = {
+        'genre': ['pop', 'rock', 'chill', 'indie', 'classical'],
+        'play_count': [100, 80, 50, 40, 20]  # Hypothetical counts
+    }'''
 
+
+    #not working
+def get_top_artists():
+    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
+    top_artists = []
+    try:
+        top_tracks_week = f"{service}/playlists/https://open.spotify.com/playlist/37i9dQZEVXbNG2KDcFcKOF?si=RbLHy5DwTBenI_SSakwuvQ/tracks" # gonna get the popular tracks in the week
+        response_top_tracks = requests.get(top_tracks_week)
+        data_top_tracks = response_top_tracks.json()
+        for artist in data_top_tracks["items"]["artists"]:
+            top_artists.append(artist)
+        print(top_artists)
     except:
         ...
 
-get_top_tracks()
+get_top_artists()
 '''
 {'genres': ['acoustic', 'afrobeat', 'alt-rock', 'alternative', 'ambient', 'anime', 'black-metal', 'bluegrass', 'blues', 
 'bossanova', 'brazil', 'breakbeat', 'british', 'cantopop', 'chicago-house', 'children', 'chill', 'classical', 'club', 'comedy', 
