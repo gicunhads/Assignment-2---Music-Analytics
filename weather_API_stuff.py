@@ -1,6 +1,7 @@
+
 import json, re, requests
 
-# the spotify part is not ready yet but ive made the funcition for temperature
+
 
 service = "https://dit009-spotify-assignment.vercel.app/api/v1"
 genres = f"{service}/recommendations/available-genre-seeds"
@@ -32,7 +33,8 @@ def get_average_temp(lat, long, start_date, end_date):
 def get_top_tracks():
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
     try:
-        top_tracks = f"{service}/top-tracks"
+        playlist_id = ...
+        top_tracks = f"{service}//playlists/{playlist_id}"
         response_top_tracks = requests.get(top_tracks)
         data_top_tracks = response_top_tracks.json()
         print(data_top_tracks)
