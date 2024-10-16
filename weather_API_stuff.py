@@ -1,6 +1,5 @@
+
 import json, re, requests
-
-
 
 service = "https://dit009-spotify-assignment.vercel.app/api/v1"
 genres = f"{service}/recommendations/available-genre-seeds"
@@ -29,17 +28,6 @@ def get_average_temp():
     except: 
         ...
 # relating temperature to genre
-'''
-def get_music_data(start_date, end_date):
-    # This function should fetch data from Spotify API to get popular tracks and their genres
-    # For demonstration, let's simulate some data
-    # You would replace this with an actual API call to Spotify
-    
-    # Sample data simulating genres and counts
-    genre_data = {
-        'genre': ['pop', 'rock', 'chill', 'indie', 'classical'],
-        'play_count': [100, 80, 50, 40, 20]  # Hypothetical counts
-    }'''
 
 
     #not working
@@ -47,7 +35,7 @@ def get_top_artists():
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
     top_artists = []
     try:
-        top_tracks_week = f"{service}/playlists/https://open.spotify.com/playlist/37i9dQZEVXbNG2KDcFcKOF?si=RbLHy5DwTBenI_SSakwuvQ/tracks" # gonna get the popular tracks in the week
+        top_tracks_week = f"{service}/playlist/37i9dQZEVXbNG2KDcFcKOF?si=RbLHy5DwTBenI_SSakwuvQ/tracks" # gonna get the popular tracks in the week
         response_top_tracks = requests.get(top_tracks_week)
         data_top_tracks = response_top_tracks.json()
         for artist in data_top_tracks["items"]["artists"]:
