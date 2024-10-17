@@ -1,23 +1,23 @@
-
 import json, re, requests
 from geopy.geocoders import Nominatim
-
 geolocator = Nominatim(user_agent="geoapiExercises")
+'''
+my idea is:
+ask for user input of lat and long
+identify which country the person is in
+then, depending on the country, cross the data with the most played song in that week in that country
+find the genre (for that, need to relate the songs to the artists and then find the genre)
+--see the most popular genre (regex maybe? or create a counter)
+and then see if there is a relation to genre and the average tempertaure in that region in that week!
+i also want to use regex for error handling when dealing with inputs'''
 
-service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-genres = f"{service}/recommendations/available-genre-seeds"
-response_genres = requests.get(genres)
-data_genres = response_genres.json()
 
-
-
-
-#after getting lat and long as inputs:
+#after getting lat and long as inputs in the main:
 lat = 57.7089 # GOING TO BE USER INPUTS
 long =11.9746
-sweden = "37i9dQZEVXbKVvfnL1Us06" # going to make a dict for this later
+sweden = "37i9dQZEVXbKVvfnL1Us06" # going to make a dict for this later, going to get the country with the Nominatim API
 date_pattern = r"\(20[0-9]{2})-(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])\b" # confirm if it is YYYY-MM-DD
-digit_pattern = r"\bd+\b"   
+digit_pattern = r"\bd+\b"   # confirm if it is digit
 
 
 def get_country(lat, long):   
@@ -89,3 +89,16 @@ def get_top_genres(list_artists_id):
 get_country(lat,long)
 get_top_artists(sweden)
 get_top_genres(get_top_artists(sweden))
+'''
+{'genres': ['acoustic', 'afrobeat', 'alt-rock', 'alternative', 'ambient', 'anime', 'black-metal', 'bluegrass', 'blues', 
+'bossanova', 'brazil', 'breakbeat', 'british', 'cantopop', 'chicago-house', 'children', 'chill', 'classical', 'club', 'comedy', 
+'country', 'dance', 'dancehall', 'death-metal', 'deep-house', 'detroit-techno', 'disco', 'disney', 'drum-and-bass', 'dub', 'dubstep', 
+'edm', 'electro', 'electronic', 'emo', 'folk', 'forro', 'french', 'funk', 'garage', 'german', 'gospel', 'goth', 'grindcore', 'groove', 
+'grunge', 'guitar', 'happy', 'hard-rock', 'hardcore', 'hardstyle', 'heavy-metal', 'hip-hop', 'holidays', 'honky-tonk', 'house', 'idm', 
+'indian', 'indie', 'indie-pop', 'industrial', 'iranian', 'j-dance', 'j-idol', 'j-pop', 'j-rock', 'jazz', 'k-pop', 'kids', 'latin', 
+'latino', 'malay', 'mandopop', 'metal', 'metal-misc', 'metalcore', 'minimal-techno', 'movies', 'mpb', 'new-age', 'new-release', 
+'opera', 'pagode', 'party', 'philippines-opm', 'piano', 'pop', 'pop-film', 'post-dubstep', 'power-pop', 'progressive-house', 
+'psych-rock', 'punk', 'punk-rock', 'r-n-b', 'rainy-day', 'reggae', 'reggaeton', 'road-trip', 'rock', 'rock-n-roll', 'rockabilly',
+ 'romance', 'sad', 'salsa', 'samba', 'sertanejo', 'show-tunes', 'singer-songwriter', 'ska', 'sleep', 'songwriter', 'soul', 'soundtracks', 
+ 'spanish', 'study', 'summer', 'swedish', 'synth-pop', 'tango', 'techno', 'trance', 'trip-hop', 'turkish', 'work-out', 'world-music']}'''
+
