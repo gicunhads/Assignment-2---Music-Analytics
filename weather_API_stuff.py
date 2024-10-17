@@ -7,11 +7,11 @@ response_genres = requests.get(genres)
 data_genres = response_genres.json()
 
 #after getting lat and long as inputs:
-lat =57.7089 # GOING TO BE USER INPUTS
+lat =57.7089 # GOING TO BE USER INPUTS, my idea is to create a dict with some regions and the user inputs the region and then we get the lat? maybe? or just define it as sweden?
 long =11.9746
 date_pattern = r"\(20[0-9]{2})-(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])\b" # confirm if it is YYYY-MM-DD
 
-
+# working:
 def get_average_temp():
     try:   
         weather = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&past_days=7&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"
@@ -27,34 +27,21 @@ def get_average_temp():
     
     except: 
         ...
-# relating temperature to genre
+# relating temperature to genre later on, seeing like if temp < x or y (AND REGION?)
 
 
-    #not working
+    #not working ;testing for sweden
 def get_top_artists():
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
     top_artists = []
     try:
-        top_tracks_week = f"{service}/playlist/37i9dQZEVXbNG2KDcFcKOF?si=RbLHy5DwTBenI_SSakwuvQ/tracks" # gonna get the popular tracks in the week
+        top_tracks_week = f"{service}/playlist/37i9dQZEVXbLoATJ81JYXz?si=_O8CFC5mQ3mEEoUmGRUk0Q/tracks" # gonna get the popular tracks in the week in sweden
         response_top_tracks = requests.get(top_tracks_week)
         data_top_tracks = response_top_tracks.json()
-        for artist in data_top_tracks["items"]["artists"]:
-            top_artists.append(artist)
+        for artist_id in data_top_tracks["items"]["artists"]["id"]:
+            top_artists.append(artist_id)
         print(top_artists)
     except:
-        ...
+        print("boo")
 
 get_top_artists()
-'''
-{'genres': ['acoustic', 'afrobeat', 'alt-rock', 'alternative', 'ambient', 'anime', 'black-metal', 'bluegrass', 'blues', 
-'bossanova', 'brazil', 'breakbeat', 'british', 'cantopop', 'chicago-house', 'children', 'chill', 'classical', 'club', 'comedy', 
-'country', 'dance', 'dancehall', 'death-metal', 'deep-house', 'detroit-techno', 'disco', 'disney', 'drum-and-bass', 'dub', 'dubstep', 
-'edm', 'electro', 'electronic', 'emo', 'folk', 'forro', 'french', 'funk', 'garage', 'german', 'gospel', 'goth', 'grindcore', 'groove', 
-'grunge', 'guitar', 'happy', 'hard-rock', 'hardcore', 'hardstyle', 'heavy-metal', 'hip-hop', 'holidays', 'honky-tonk', 'house', 'idm', 
-'indian', 'indie', 'indie-pop', 'industrial', 'iranian', 'j-dance', 'j-idol', 'j-pop', 'j-rock', 'jazz', 'k-pop', 'kids', 'latin', 
-'latino', 'malay', 'mandopop', 'metal', 'metal-misc', 'metalcore', 'minimal-techno', 'movies', 'mpb', 'new-age', 'new-release', 
-'opera', 'pagode', 'party', 'philippines-opm', 'piano', 'pop', 'pop-film', 'post-dubstep', 'power-pop', 'progressive-house', 
-'psych-rock', 'punk', 'punk-rock', 'r-n-b', 'rainy-day', 'reggae', 'reggaeton', 'road-trip', 'rock', 'rock-n-roll', 'rockabilly',
- 'romance', 'sad', 'salsa', 'samba', 'sertanejo', 'show-tunes', 'singer-songwriter', 'ska', 'sleep', 'songwriter', 'soul', 'soundtracks', 
- 'spanish', 'study', 'summer', 'swedish', 'synth-pop', 'tango', 'techno', 'trance', 'trip-hop', 'turkish', 'work-out', 'world-music']}'''
-
