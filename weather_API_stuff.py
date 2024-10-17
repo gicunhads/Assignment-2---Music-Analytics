@@ -15,6 +15,7 @@ data_genres = response_genres.json()
 #after getting lat and long as inputs:
 lat = 57.7089 # GOING TO BE USER INPUTS
 long =11.9746
+sweden = "37i9dQZEVXbKVvfnL1Us06" # going to make a dict for this later
 date_pattern = r"\(20[0-9]{2})-(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])\b" # confirm if it is YYYY-MM-DD
 digit_pattern = r"\bd+\b"   
 
@@ -47,12 +48,12 @@ def get_average_temp(lat, long):
 
 
     #testing for sweden
-def get_top_artists():
+def get_top_artists(country):
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
     top_artists = []
-    top_genres = []
+    
     try:
-        top_tracks_week = f"{service}/playlists/37i9dQZEVXbKVvfnL1Us06/tracks" # gonna get the popular tracks in the week in sweden
+        top_tracks_week = f"{service}/playlists/{country}/tracks" # gonna get the popular tracks in the week in sweden
         response_top_tracks = requests.get(top_tracks_week)
         data_top_tracks = response_top_tracks.json()
         
@@ -64,17 +65,27 @@ def get_top_artists():
                 artist_id = artist["id"]
                 top_artists.append(artist_id)
                 
-                artist_url = f"{service}/artists/{artist_id}"
-                response_artist = requests.get(artist_url)
-                artist_data = response_artist.json()
                 
-                genres = artist_data.get("genres", [])
-                if genres != []:   
-                    top_genres.append(genres)
-        print(top_artists, top_genres)  
+        return top_artists
     
     except:
         print("boo")
 
+def get_top_genres(list_artists_id):
+    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
+    top_genres = []
+    for artist_id in list_artists_id:
+        artist_url = f"{service}/artists/{artist_id}"
+        response_artist = requests.get(artist_url)
+        artist_data = response_artist.json()
+        
+        genres = artist_data.get("genres", [])
+        if genres != []:   
+            top_genres.append(genres)
+    print(top_genres)
+    return top_genres
+
+
 get_country(lat,long)
-get_top_artists()
+get_top_artists(sweden)
+get_top_genres(get_top_artists(sweden))
