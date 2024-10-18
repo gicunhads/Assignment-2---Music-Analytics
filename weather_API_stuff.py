@@ -1,3 +1,4 @@
+
 import json, re, requests
 from geopy.geocoders import Nominatim
 geolocator = Nominatim(user_agent="geoapiExercises")
@@ -15,7 +16,6 @@ i also want to use regex for error handling when dealing with inputs'''
 #after getting lat and long as inputs in the main:
 # testing
  # going to make a dict for this later, going to get the country with the Nominatim API
-date_pattern = r"\(20[0-9]{2})-(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])\b" # confirm if it is YYYY-MM-DD
 digit_pattern = r"\bd+\b"   # confirm if it is digit
 
 country_playlist = {
@@ -28,19 +28,28 @@ country_playlist = {
 }
 
 
-
-
 def get_country_playlist(lat, long):   
-    location = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={long}"  
-    response_location = requests.get(location) 
-    data_location = response_location.json()
-    country = data_location["address"]["country"]
-    print(f"Seems you are in {country}!")
-    country = country.lower()
-    if country in country_playlist.keys():
-        return country_playlist.get(country)
-        
-
+    country_playlist = {
+    "sverige": "37i9dQZEVXbKVvfnL1Us06",
+    "usa": "37i9dQZEVXbLRQDuF5jeBp",
+    "brasil": "37i9dQZEVXbKzoK95AbRy9",
+    "canada": "37i9dQZEVXbMda2apknTqH",
+    "italia": "37i9dQZEVXbIQnj7RRhdSX",
+    "france": "37i9dQZEVXbKQ1ogMOyW9N",
+    }
+    try:    
+        location = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={long}"  
+        response_location = requests.get(location) 
+        data_location = response_location.json()
+        country = data_location["address"]["country"]
+        print(f"Seems you are in {country}!")
+        country = country.lower()
+        if country in country_playlist.keys():
+            return country_playlist.get(country)
+        elif country not in country_playlist.keys():
+            return None
+    except:
+        print("error in get country playlist")
 
 def get_average_temp(lat, long):
     try:   
@@ -56,7 +65,7 @@ def get_average_temp(lat, long):
         return f"{average_temp:.2f}"
     
     except: 
-        ...
+        print("error in get average temperature")
 # relating temperature to genre (AND REGION?)
 
 
@@ -79,32 +88,38 @@ def get_top_artists(country_playlist):
                     artist_id = artist["id"]
                     top_artists.append(artist_id)
                     
-                
+               
         return top_artists
     
     except:
-        print("boo")
+        print("error in get top artists")
 
 def get_top_genres(list_artists_id):
-    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-    top_genres = []
-    for artist_id in list_artists_id:
-        artist_url = f"{service}/artists/{artist_id}"
-        response_artist = requests.get(artist_url)
-        artist_data = response_artist.json()
-        
-        genres = artist_data.get("genres", [])
-        if genres != []:   
-            top_genres.append(genres)
-    print(top_genres)
-    return top_genres
+    try:    
+        service = "https://dit009-spotify-assignment.vercel.app/api/v1"
+        top_genres = []
+        for artist_id in list_artists_id[:10]:
+            artist_url = f"{service}/artists/{artist_id}"
+            response_artist = requests.get(artist_url)
+            artist_data = response_artist.json()
+            
+            genres = artist_data.get("genres", [])
+            if genres != []:   
+                for item in genres:
+                    if item not in top_genres:
+                        top_genres.append(item)
+        return top_genres
+    except:
+        print("error in get top genres")
 
 
-
-get_country_playlist("41.8933", "12.4828")
-get_top_artists(get_country_playlist("48.8575", "2.3514"))
-
-
+"""
+Italy (Rome): ("41.9028", "12.4964")
+France (Paris): ("48.8566", "2.3522")
+Canada (Toronto): ("43.651070", "-79.347015")
+United States (New York City): ("40.7128", "-74.0060")
+Sweden (Stockholm): ("59.3293", "18.0686")
+"""
 
 
 '''
@@ -120,3 +135,16 @@ get_top_artists(get_country_playlist("48.8575", "2.3514"))
  'romance', 'sad', 'salsa', 'samba', 'sertanejo', 'show-tunes', 'singer-songwriter', 'ska', 'sleep', 'songwriter', 'soul', 'soundtracks', 
  'spanish', 'study', 'summer', 'swedish', 'synth-pop', 'tango', 'techno', 'trance', 'trip-hop', 'turkish', 'work-out', 'world-music']}'''
 
+
+def main():
+    digit_pattern = r"\d+"   # confirm if it is digit
+    lat = input("Insert latitude: ")
+    long = input("Insert longiude: ")
+    if re.match(digit_pattern, lat) and re.match(digit_pattern, long):
+        average_temperature = get_average_temp(lat, long)
+        top_genres = get_top_genres(get_top_artists((get_country_playlist(lat, long))))
+        print(f"average temperature in this week is {average_temperature}")
+        print(f"the top genres were {top_genres}")
+
+if __name__ == "__main__":
+    main()
