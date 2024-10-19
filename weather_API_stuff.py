@@ -71,8 +71,8 @@ def get_average_temp(lat, long):
 
 def get_top_artists(country_playlist):
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-    top_artists = []
-   
+    top_artists = ""
+    i = 0
     try:
         top_tracks_week = f"{service}/playlists/{country_playlist}/tracks" # gonna get the popular tracks in the week 
         response_top_tracks = requests.get(top_tracks_week, timeout = 10)
@@ -92,52 +92,30 @@ def get_top_artists(country_playlist):
             artists = track["artists"]  
             
             for artist in artists:
-                if "id" in artist.keys():
-                    artist_id = artist["id"]
-                    top_artists.append(artist_id)
-                    
+                while i < 20:
+                    if "id" in artist.keys():
+                        artist_id = artist["id"]
+                        top_artists += artist_id + ","
+                        i += 1
+                        
                
-        return top_artists
+        return top_artists[:-1] # removing the last coma
     
     except ReadTimeout:
         print("error in get top artists")
 
 def get_top_genres(list_artists_id):
+    genres = []
     try:    
-        service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-        top_genres = []
-        for artist_id in list_artists_id:
-            artist_url = f"{service}/artists/{artist_id}"
-            response_artist = requests.get(artist_url, timeout = 15)
-
-            if response_artist == 429:  
-                retry_after = int(response_artist.headers.get("Retry-After", 20))
-                print(f"Rate limited. Retrying after {retry_after} seconds...")
-                time.sleep(retry_after)
-                
-                
-                response_artist = requests.get(artist_url, timeout=5)
-                artist_data = response_artist.json()
-            
-            
-            artist_data = response_artist.json()
-            
-            genres = artist_data.get("genres", timeout = 10)
-            
-            if artist_data == 429:  
-                retry_after = int(artist_data.headers.get("Retry-After", 20))
-                print(f"Rate limited. Retrying after {retry_after} seconds...")
-                time.sleep(retry_after)
-                
-                
-                response_artist = artist_data.get("genres", timeout = 15)
-                artist_data = response_artist.json()
-
-            if genres != []:   
-                for item in genres:
-                    if item not in top_genres:
-                        top_genres.append(item)
-        return top_genres
+        service = "https://dit009-spotify-assignment.vercel.app/api/v1" 
+        
+        artists_data = f"{service}/artists?ids={list_artists_id}"
+        response_artist = requests.get(artists_data, timeout = 15)
+        artist_data_json = response_artist.json()
+        list_of_dicts = artist_data_json.items() # fix
+        if list_of_dicts.key() == "genres":
+            genres = list_of_dicts["genres"]
+            return genres
     except ReadTimeout:
         print("error in get top genres")
 
@@ -179,4 +157,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
