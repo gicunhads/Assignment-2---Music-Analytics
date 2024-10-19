@@ -13,11 +13,8 @@ find the genre (for that, need to relate the songs to the artists and then find 
 and then see if there is a relation to genre and the average tempertaure in that region in that week!
 i also want to use regex for error handling when dealing with inputs'''
 
-# 37i9dQZEVXbL3J0k32lWnN
-# 56.2639
-# 9.5018
-
 playlist_id_pattern = r"[A-Za-z0-9]{22}"
+word_pattern = r"\w+"
 
 country_playlist = {
     "sweden": "37i9dQZEVXbKVvfnL1Us06",
@@ -26,6 +23,7 @@ country_playlist = {
     "canada": "37i9dQZEVXbMda2apknTqH",
     "italy": "37i9dQZEVXbIQnj7RRhdSX",
     "france": "37i9dQZEVXbKQ1ogMOyW9N",
+    "denmark": "37i9dQZEVXbL3J0k32lWnN",
     }
 
 
@@ -52,8 +50,16 @@ def get_country_playlist(lat, long):
     try:    
         location = f"https://nominatim.openstreetmap.org/reverse.php?format=json&lat={lat}&lon={long}&accept-language=en"  
         response_location = requests.get(location, timeout = 5) 
-       
-        if response_location.status_code != 200:
+
+        if response_location.status_code == 403:
+            print(f"Error: Received 403 Forbidden. The location API request was blocked.")
+            answer = input("Would you like to inform your country and playlist ID? [y] for yes: ")
+            if answer == "y":
+                country = input("Insert your country: ")
+                if re.match(word_pattern, country):
+                    return append_country_playlist(country)
+        
+        elif response_location.status_code != 200:
             print(f"Error: Received {response_location.status_code} from location API.")
             return None
        
@@ -83,9 +89,9 @@ def get_average_temp(lat, long):
         average_temp = sum_temp/(len(data_weather["hourly"]["temperature_2m"]))
         return f"{average_temp:.2f}"
     
-    except: 
-        print("error in get average temperature")
-# relating temperature to genre (AND REGION?)
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
 
 def get_top_artists(country_playlist):
@@ -93,7 +99,7 @@ def get_top_artists(country_playlist):
     csv_artists_id = ""
     i = 0
     try:
-        top_tracks_week = f"{service}/playlists/{country_playlist}/tracks" # gonna get the popular tracks in the week 
+        top_tracks_week = f"{service}/playlists/{country_playlist}/tracks"  
         response_top_tracks = requests.get(top_tracks_week, timeout = 10)
         if response_top_tracks == 429:
             
@@ -132,7 +138,7 @@ def get_top_genres(csv_artists_id):
         artists_data = f"{service}/artists?ids={csv_artists_id}"
         response_artist = requests.get(artists_data, timeout = 15)
         artist_data_json = response_artist.json()
-        list_of_dicts = artist_data_json["artists"] # fix
+        list_of_dicts = artist_data_json["artists"] 
         
         for artist in list_of_dicts:   
             if "genres" in artist:
@@ -156,7 +162,7 @@ Sweden (Stockholm): ("59.3293", "18.0686")
 
 
 def main():
-    digit_pattern = r"-*\d+"   # confirm if it is digit
+    digit_pattern = r"-*\d+"   
     lat = input("Insert latitude: ")
     long = input("Insert longiude: ")
     if re.match(digit_pattern, lat) and re.match(digit_pattern, long):
