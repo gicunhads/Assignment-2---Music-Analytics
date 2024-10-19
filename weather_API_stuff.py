@@ -37,7 +37,8 @@ def append_country_playlist(country):
 
         if re.match(playlist_id_pattern, playlist_id):
             country_playlist[country] = playlist_id
-            get_top_artists(playlist_id)
+            return playlist_id
+
         else:
             print("Invalid arguments.")
             return append_country_playlist(country)
@@ -89,7 +90,7 @@ def get_average_temp(lat, long):
 
 def get_top_artists(country_playlist):
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-    top_artists = ""
+    csv_artists_id = ""
     i = 0
     try:
         top_tracks_week = f"{service}/playlists/{country_playlist}/tracks" # gonna get the popular tracks in the week 
@@ -113,11 +114,11 @@ def get_top_artists(country_playlist):
                 while i < 20:
                     if "id" in artist.keys():
                         artist_id = artist["id"]
-                        top_artists += artist_id + ","
+                        csv_artists_id += artist_id + ","
                         i += 1
                             
                 
-            return top_artists[:-1] # removing the last coma
+            return csv_artists_id[:-1] # removing the last coma
     
     
     except ReadTimeout:
