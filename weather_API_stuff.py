@@ -104,18 +104,23 @@ def get_top_artists(country_playlist):
     except ReadTimeout:
         print("error in get top artists")
 
-def get_top_genres(list_artists_id):
-    genres = []
+def get_top_genres(csv_artists_id):
+    genres_list = []
     try:    
         service = "https://dit009-spotify-assignment.vercel.app/api/v1" 
         
-        artists_data = f"{service}/artists?ids={list_artists_id}"
+        artists_data = f"{service}/artists?ids={csv_artists_id}"
         response_artist = requests.get(artists_data, timeout = 15)
         artist_data_json = response_artist.json()
-        list_of_dicts = artist_data_json.items() # fix
-        if list_of_dicts.key() == "genres":
-            genres = list_of_dicts["genres"]
-            return genres
+        list_of_dicts = artist_data_json["artists"] # fix
+        
+        for artist in list_of_dicts:   
+            if "genres" in artist:
+                genres = artist["genres"]
+                genres_list.extend(genres)  
+
+        return genres_list
+    
     except ReadTimeout:
         print("error in get top genres")
 
@@ -145,6 +150,8 @@ Sweden (Stockholm): ("59.3293", "18.0686")
 
 """canada['3y2cIKLjiOlp1Np37WiUdH', '1HY2Jd0NmPuamShAr6KMms', '0du5cEVh5yTK9QJze8zA0C', '74KM79TiuVKeVCqs8QtB0B', '6qqNVTkY8uBg9cP3Jd7DAH', '1Xyo4u8uXC1ZmMpatF05PJ', '699OTQXzgjhIYAHMy9RyPD', '246dkjvS1zLTtiykXe5h60', '4oUHIQIBe0LHzYfvXNW4QM', '7GlBOeep6PqTfFi59PTUUN', '1iCnM8foFssWlPRLfAbIwo', '74KM79TiuVKeVCqs8QtB0B', '22wbnEMDvgVIAGdFeek6ET', '74KM79TiuVKeVCqs8QtB0B', '4tuJ0bMpJh08umKkEXKUI5', '40ZNYROS4zLfyyBSs2PGe2', '70kkdajctXSbqSMJbQO424', '2RQXRUsr4IW1f3mKyKsy4B', '33qOK5uJ8AR2xuQQAhHump', '74KM79TiuVKeVCqs8QtB0B', '7Ez6lTtSMjMf2YSYpukP1I', '40ZNYROS4zLfyyBSs2PGe2', '40ZNYROS4zLfyyBSs2PGe2', '2FXC3k01G6Gw61bmprjgqS', '718COspgdWOnwOFpJHRZHS', '7GlBOeep6PqTfFi59PTUUN', '6qqNVTkY8uBg9cP3Jd7DAH', '1oSPZhvZMIrWW5I41kPkkY', '0Y5tJX1MQlPlqiwlOH1tJY', '699OTQXzgjhIYAHMy9RyPD', '4oUHIQIBe0LHzYfvXNW4QM', '3bO19AOone0ubCsfDXDtYt', '2YZyLoL8N0Wb9xBt1NhZWg', '4gvjmrtzydbMpyJaXUtwvP', '22wbnEMDvgVIAGdFeek6ET', '4j96cMcT8GRi11qbvo1cLQ', '1WaFQSHVGZQJTbf0BdxdNo', '10exVja0key0uqUkk6LJRT', '77SW9BnxLY8rJ0RciFqkHh', '25uiPmTg16RbhZWAqwLBy5', '6qqNVTkY8uBg9cP3Jd7DAH', '4oUHIQIBe0LHzYfvXNW4QM', '4GGfAshSkqoxpZdoaHm7ky', '2tIP7SsRs7vjIcLrU85W8J', '5HK6QtizXJzCmoYTkvFRik', '64KEffDW9EtZ1y2vBYgq8T', '3oSJ7TBVCWMDMiYjXNiCKE', '40ZNYROS4zLfyyBSs2PGe2', '1nzgtKYFckznkcVMR3Gg4z', '6Xgp2XMz1fhVYe7i6yNAax', '74KM79TiuVKeVCqs8QtB0B', '4Gso3d4CscCijv0lmajZWs', '25uiPmTg16RbhZWAqwLBy5', '66CXWjxzNUsdJxJ2JdwvnR', '4oUHIQIBe0LHzYfvXNW4QM', '7GlBOeep6PqTfFi59PTUUN', '45dkTj5sMRSjrmBSBeiHym', '0rvjqX7ttXeg3mTy8Xscbt', '2hlmm7s2ICUX0LVIhVFlZQ', ...]; ['modern country pop', 'pop rap', 'art pop', 'dance pop', 'pop', 'indie pop', 'bedroom pop', 'classic oklahoma country', 'atl hip hop', 'plugg', 'pluggnb', 'rage rap', 'rap', 'contemporary country', 'singer-songwriter pop', 'candy pop', 'metropopolis', 'uk pop', 'melodic rap', 'trap', 'country']"""
 """us:['1HY2Jd0NmPuamShAr6KMms', '0du5cEVh5yTK9QJze8zA0C', '6qqNVTkY8uBg9cP3Jd7DAH', '74KM79TiuVKeVCqs8QtB0B', '7GlBOeep6PqTfFi59PTUUN', '1Xyo4u8uXC1ZmMpatF05PJ', '699OTQXzgjhIYAHMy9RyPD', '1iCnM8foFssWlPRLfAbIwo', '1oSPZhvZMIrWW5I41kPkkY', '74KM79TiuVKeVCqs8QtB0B', '246dkjvS1zLTtiykXe5h60', '4oUHIQIBe0LHzYfvXNW4QM', '4tuJ0bMpJh08umKkEXKUI5', '3y2cIKLjiOlp1Np37WiUdH', '74KM79TiuVKeVCqs8QtB0B', '74KM79TiuVKeVCqs8QtB0B', '7GlBOeep6PqTfFi59PTUUN', '6qqNVTkY8uBg9cP3Jd7DAH', '4AK6F7OLvEQ5QYCBNiQWHq', '7GlBOeep6PqTfFi59PTUUN', '22wbnEMDvgVIAGdFeek6ET', '40ZNYROS4zLfyyBSs2PGe2', '70kkdajctXSbqSMJbQO424', '2YZyLoL8N0Wb9xBt1NhZWg', '33qOK5uJ8AR2xuQQAhHump', '2RQXRUsr4IW1f3mKyKsy4B', '77SW9BnxLY8rJ0RciFqkHh', '4AK6F7OLvEQ5QYCBNiQWHq', '2tIP7SsRs7vjIcLrU85W8J', '4V8LLVI7PbaPR0K2TGSxFF', '1U1el3k54VvEUzo3ybLPlM', '1WaFQSHVGZQJTbf0BdxdNo', '40ZNYROS4zLfyyBSs2PGe2', '2sSGPbdZJkaSE2AbcGOACx', '40ZNYROS4zLfyyBSs2PGe2', '2hlmm7s2ICUX0LVIhVFlZQ', '74KM79TiuVKeVCqs8QtB0B', '2FXC3k01G6Gw61bmprjgqS', '22wbnEMDvgVIAGdFeek6ET', '6qxpnaukVayrQn6ViNvu9I', '4oUHIQIBe0LHzYfvXNW4QM', '4GGfAshSkqoxpZdoaHm7ky', '12GqGscKJx3aE4t07u7eVZ', '6pV5zH2LzjOUHaAvENdMMa', '718COspgdWOnwOFpJHRZHS', '74KM79TiuVKeVCqs8QtB0B', '4oUHIQIBe0LHzYfvXNW4QM', '0Y5tJX1MQlPlqiwlOH1tJY', '699OTQXzgjhIYAHMy9RyPD', '7GlBOeep6PqTfFi59PTUUN', '0ErzCpIMyLcjPiwT4elrtZ', '0yknvLWQZxwsMjhUhwWZQ8', '0hF6lbAjRsq4svrQUr5sgU', '4gvjmrtzydbMpyJaXUtwvP', '25uiPmTg16RbhZWAqwLBy5', '6qqNVTkY8uBg9cP3Jd7DAH', '2h93pZq0e7k5yf4dywlkpM', '40ZNYROS4zLfyyBSs2PGe2', '7Ez6lTtSMjMf2YSYpukP1I', ...]"""
+
+
 def main():
     digit_pattern = r"-*\d+"   # confirm if it is digit
     lat = input("Insert latitude: ")
@@ -157,3 +164,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
