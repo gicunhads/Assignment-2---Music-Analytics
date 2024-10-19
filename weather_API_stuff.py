@@ -8,7 +8,7 @@ my idea is:
 ask for user input of lat and long
 identify which country the person is in
 then, depending on the country, cross the data with the most played songs in that week in that country
-find their genre (for that, need to relate the songs to the artists and then find the genre)
+find the genre (for that, need to relate the songs to the artists and then find the genre)
 --see the most popular genre (regex maybe? or create a counter)
 and then see if there is a relation to genre and the average tempertaure in that region in that week!
 i also want to use regex for error handling when dealing with inputs'''
@@ -50,9 +50,13 @@ def append_country_playlist(country):
 
 def get_country_playlist(lat, long):   
     global country_playlist
+    headers =  {
+    'User-Agent': 'gigi',
+    'From': 'gicunhads@gmail.com'  
+}
     try:    
         location = f"https://nominatim.openstreetmap.org/reverse.php?format=json&lat={lat}&lon={long}&accept-language=en"  
-        response_location = requests.get(location, timeout = 5) 
+        response_location = requests.get(location, headers=headers, timeout = 5) 
 
         if response_location.status_code == 403:
             print(f"Error: Received 403 Forbidden. The location API request was blocked.")
