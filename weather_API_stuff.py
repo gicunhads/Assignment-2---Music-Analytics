@@ -47,19 +47,6 @@ def get_country_playlist(lat, long):
     try:    
         location = f"https://nominatim.openstreetmap.org/reverse.php?format=json&lat={lat}&lon={long}&accept-language=en"  
         response_location = requests.get(location, headers=headers, timeout = 5) 
-
-        if response_location.status_code == 403:
-            print(f"Error: Location could not be found.")
-            answer = input("Would you like to inform your country and playlist ID? [y] for yes: ")
-            
-            if answer == "y":
-                country = input("Insert your country: ").lower()
-                if re.match(word_pattern, country):
-                    if country in country_playlist.keys():
-                        return country_playlist.get(country)
-                    elif country not in country_playlist.keys():
-                        return append_country_playlist(country)
-       
         data_location = response_location.json()
         country = data_location["address"]["country"]
         
@@ -72,10 +59,17 @@ def get_country_playlist(lat, long):
             return append_country_playlist(country)
     
     except ReadTimeout:
-        print("Error in get country playlist")
-    except Exception as e:
-        print(f"Error: {e}")
-        return None
+        print("Error: Timeout. in get country playlist")
+    except Exception:
+        print(f"Error: Location could not be found.")
+        answer = input("Would you like to inform your country and playlist ID? [y] for yes: ") 
+        if answer == "y":
+            country = input("Insert your country: ").lower()
+            if re.match(word_pattern, country):
+                if country in country_playlist.keys():
+                    return country_playlist.get(country)
+                elif country not in country_playlist.keys():
+                    return append_country_playlist(country)
         
     
 
@@ -181,6 +175,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
 
