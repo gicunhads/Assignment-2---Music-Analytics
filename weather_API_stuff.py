@@ -161,7 +161,7 @@ def get_top_genres(csv_artists_id):
 
 
 def main():
-    digit_pattern = r"-*\d+"   # confirm if it is digit
+    digit_pattern = r"-*\d+"   
     lat = input("Insert latitude: ")
     long = input("Insert longitude: ")
     
@@ -170,7 +170,7 @@ def main():
         top_genres = get_top_genres(get_top_artists((get_country_playlist(lat, long))))
         
         if top_genres != None: 
-            print(f"average temperature in this week is {average_temperature}")
+            print(f"average temperature in this week is {average_temperature}°C")
             print(f"the top genres were {top_genres}")
     
 if __name__ == "__main__":
