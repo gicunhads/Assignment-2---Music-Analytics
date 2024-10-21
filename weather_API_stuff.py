@@ -3,22 +3,11 @@ import json, re, requests, time
 from geopy.geocoders import Nominatim
 from requests import ReadTimeout
 geolocator = Nominatim(user_agent="geoapiExercises")
-'''
-my idea is:
-ask for user input of lat and long
-identify which country the person is in
-then, depending on the country, cross the data with the most played songs in that week in that country
-find the genre (for that, need to relate the songs to the artists and then find the genre)
---see the most popular genre (regex maybe? or create a counter)
-and then see if there is a relation to genre and the average tempertaure in that region in that week!
-i also want to use regex for error handling when dealing with inputs'''
 
-# 37i9dQZEVXbL3J0k32lWnN
-# 56.2639
-# 9.5018
+
 
 playlist_id_pattern = r"[A-Za-z0-9]{22}"
-word_pattern = r"\w+"
+word_pattern = r"[a-z]+"
 
 country_playlist = {
     "sweden": "37i9dQZEVXbKVvfnL1Us06",
@@ -27,6 +16,7 @@ country_playlist = {
     "canada": "37i9dQZEVXbMda2apknTqH",
     "italy": "37i9dQZEVXbIQnj7RRhdSX",
     "france": "37i9dQZEVXbKQ1ogMOyW9N",
+    "denmark": "37i9dQZEVXbL3J0k32lWnN",
     }
 
 
@@ -59,31 +49,34 @@ def get_country_playlist(lat, long):
         response_location = requests.get(location, headers=headers, timeout = 5) 
 
         if response_location.status_code == 403:
-            print(f"Error: Received 403 Forbidden. The location API request was blocked.")
+            print(f"Error: Location could not be found.")
             answer = input("Would you like to inform your country and playlist ID? [y] for yes: ")
+            
             if answer == "y":
-                country = input("Insert your country: ")
+                country = input("Insert your country: ").lower()
                 if re.match(word_pattern, country):
                     if country in country_playlist.keys():
                         return country_playlist.get(country)
                     elif country not in country_playlist.keys():
                         return append_country_playlist(country)
-        
-        elif response_location.status_code != 200:
-            print(f"Error: Received {response_location.status_code} from location API.")
-            return None
        
         data_location = response_location.json()
         country = data_location["address"]["country"]
         
         print(f"Seems you are in {country}!")
         country = country.lower()
+        
         if country in country_playlist.keys():
             return country_playlist.get(country)
-        elif country not in country_playlist.keys():
+        else:
             return append_country_playlist(country)
+    
     except ReadTimeout:
         print("Error in get country playlist")
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+        
     
 
 def get_average_temp(lat, long):
@@ -103,7 +96,7 @@ def get_average_temp(lat, long):
         print(f"Error: {e}")
         return None
         
-# relating temperature to genre (AND REGION?)
+
 
 
 def get_top_artists(country_playlist):
@@ -129,7 +122,7 @@ def get_top_artists(country_playlist):
             artists = track["artists"]  
             
             for artist in artists:
-                while i < 20:
+                while i <= 30: # getting several artists have a limit for the API 
                     if "id" in artist.keys():
                         artist_id = artist["id"]
                         csv_artists_id += artist_id + ","
@@ -176,13 +169,18 @@ Sweden (Stockholm): ("59.3293", "18.0686")
 def main():
     digit_pattern = r"-*\d+"   # confirm if it is digit
     lat = input("Insert latitude: ")
-    long = input("Insert longiude: ")
+    long = input("Insert longitude: ")
+    
     if re.match(digit_pattern, lat) and re.match(digit_pattern, long):
         average_temperature = get_average_temp(lat, long)
         top_genres = get_top_genres(get_top_artists((get_country_playlist(lat, long))))
+        
+        
         print(f"average temperature in this week is {average_temperature}")
         print(f"the top genres were {top_genres}")
 
 if __name__ == "__main__":
     main()
+
+
 
