@@ -17,6 +17,7 @@ country_playlist = {
     "italy": "37i9dQZEVXbIQnj7RRhdSX",
     "france": "37i9dQZEVXbKQ1ogMOyW9N",
     "denmark": "37i9dQZEVXbL3J0k32lWnN",
+    "netherlands": "37i9dQZEVXbKCF6dqVpDkS"
     }
 
 
@@ -136,6 +137,7 @@ def get_top_artists(country_playlist):
 
 def get_top_genres(csv_artists_id):
     genres_list = []
+    names_list = []
     if csv_artists_id != None:   
         try:    
             service = "https://dit009-spotify-assignment.vercel.app/api/v1" 
@@ -150,13 +152,20 @@ def get_top_genres(csv_artists_id):
                     genres = artist["genres"]
                     if genres not in genres_list and genres != []:
                         genres_list.append(genres)  
-                
+                if "name" in artist:
+                    name = artist["name"]
+                    if name not in names_list and name != "":
+                        names_list.append(name) 
 
-
-            return genres_list if  genres_list != [] else None
-        
+            if genres_list != []:
+                return genres_list
+            
+            else:
+                print(f"No genres found.")
+                print(f"top artists: {names_list}")
         except ReadTimeout:
-            print("error in get top genres")
+            print("Error in get top genres: Timeout")
+        
     else:
         return None
 
@@ -174,8 +183,11 @@ def main():
         
         if top_genres != None: 
             print(f"average temperature in this week is {average_temperature}°C")
-            print(f"the top genres were {top_genres}")
+            if top_genres != []:
+                print(f"the top genres were {top_genres}")
+            
     
 if __name__ == "__main__":
     main()
+
 
