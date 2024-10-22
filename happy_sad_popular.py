@@ -3,11 +3,11 @@ import re
 import matplotlib.pyplot as plt
 
 
-def determine_sad_or_happy():
+def determine_sad_or_happy(choice):
 
     ratios = {}
 
-    with open('./resources/songs.json', 'r') as file:
+    with open(f'./resources/{choice}_songs.json', 'r') as file:
         lyric = json.load(file)
 
     # Used chatgpt to get the 50 most used words in sad songs and happy songs.
@@ -56,7 +56,12 @@ def plot_happy_or_sad():
 
 
 def happy_or_sad_popular():
-    ratios = determine_sad_or_happy()
+
+    print('Choose which country you want to see the happy/sad correlation with popularity in, you can chose between Denmark, Sweden or the global top50: ')
+    choice = input('(Write: Denmark, Sweden or global): ')
+    choice.lower()
+
+    ratios = determine_sad_or_happy(choice)
 
     song_names = []
     song_ratio = []
@@ -64,7 +69,7 @@ def happy_or_sad_popular():
         song_names.append(key)
         song_ratio.append(ratios[key])
 
-    with open('./resources/spotify.json', 'r') as file:
+    with open(f'./resources/{choice}_spotify.json', 'r') as file:
         spotify = json.load(file)
 
     popularity_of_song = []
@@ -92,14 +97,15 @@ def happy_or_sad_popular():
     num_of_happy = len(happy_popularity)
     num_of_sad = len(sad_popularity)
 
-    print(f'The average popularity of happy songs: {avg_happy}, and the average of the sad songs: {avg_sad}')
+    print('\n')
+    print(f'The average popularity of happy songs: {avg_happy:.2f}, and the average of the sad songs: {avg_sad:.2f}')
 
     if avg_happy > avg_sad:
-        print('Therefore it can be concluded that currently happy songs are more popular than sad songs')
+        print(f'Therefore it can be concluded that currently happy songs are more popular than sad songs in {choice.capitalize()}')
     elif avg_sad > avg_happy:
-        print('Therefore it can be concluded that currently sad songs are more popular than happy songs')
+        print(f'Therefore it can be concluded that currently sad songs are more popular than happy songs in {choice.capitalize()}')
     else:
-        print('People like sad and happy songs equally')
+        print(f'People like sad and happy songs equally in {choice.capitalize()}')
 
     if avg_happy > avg_sad and num_of_happy > num_of_sad:
         print('And there are also more happy songs than sad songs in the top 50')
@@ -112,7 +118,7 @@ def happy_or_sad_popular():
     else:
         print('And there are equally many sad and happy songs in the top 50')
 
-    print(f'There were {num_of_happy} happy songs and {num_of_sad} sad songs in the world top 50 \n')
+    print(f'There were {num_of_happy} happy songs and {num_of_sad} sad songs in {choice.capitalize()}s top 50 \n')
 
     print(f'Was unable to find lyrics for the following {len(songs_missing_lyrics)} songs: {songs_missing_lyrics}. \nAnd therefore they have been excluded from the data')
 
