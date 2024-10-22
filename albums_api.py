@@ -32,35 +32,34 @@ def artist_id_search(name):
 
 def artist_albums(id):
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-    album_search = f"{service}/artists/{id}/albums"
+    album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
     albums = requests.get(album_search)
     album_file = albums.json()
     d1 = datetime.today().date()
+    dicto = {}
     for item in album_file["items"]:
-        dicto = {}
         name = item["name"]
         release_date = item["release_date"]
-        release_date1 = datetime.strptime(release_date,'%Y-%m-%d').date()
-        if d1 > release_date1:
-            d1 = release_date1
-
         dicto[name] = release_date
+        release_date1 = datetime.strptime(release_date,'%Y-%m-%d').date()
+        if d1 > release_date:
+            d1 = release_date
+
     year = d1.year()
-    if len(dicto) == 20:
-         album_search2 = #will make another album search that only searches thru the years it hasnt searched yet
-         albums2 = requests.get(album_search)
-         
-
-       
 
 
-def main():
-    artist_name = input("Input artist name: ")
-    artist_id = artist_id_search(artist_name)
-    albums = artist_albums(artist_id)
+    if len(dicto) == 50:
+        album_search2 = f"{service}/artists/{id}/albums?limit=50&include_groups=album&year:1800-{year}"#does not work
+        album_get = requests.get(album_search2)
+        album_file2 = album_get.json
+        for item in album_file2["items"]:
+            name = item["name"]
+            release_date = item["release_date"]
+            release_date1 = datetime.strptime(release_date,'%Y-%m-%d').date()
+            if d1 > release_date:
+               d1 = release_date
+            dicto[name] = release_date
+        
 
-   
 
-
-if __name__ == "__main__":
-    main()
+    print(dicto)
