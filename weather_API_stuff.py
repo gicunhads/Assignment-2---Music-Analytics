@@ -60,6 +60,7 @@ def get_country_playlist(lat, long):
     
     except ReadTimeout:
         print("Error: Timeout. in get country playlist")
+    
     except Exception:
         print(f"Error: Location could not be found.")
         answer = input("Would you like to inform your country and playlist ID? [y] for yes: ") 
@@ -147,10 +148,12 @@ def get_top_genres(csv_artists_id):
             for artist in list_of_dicts:   
                 if "genres" in artist:
                     genres = artist["genres"]
-                    if genres not in genres_list:
+                    if genres not in genres_list and genres != []:
                         genres_list.append(genres)  
+                
 
-            return genres_list
+
+            return genres_list if  genres_list != [] else None
         
         except ReadTimeout:
             print("error in get top genres")
@@ -175,3 +178,4 @@ def main():
     
 if __name__ == "__main__":
     main()
+
