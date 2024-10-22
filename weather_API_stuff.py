@@ -9,38 +9,36 @@ geolocator = Nominatim(user_agent="geoapiExercises")
 playlist_id_pattern = r"[A-Za-z0-9]{22}"
 word_pattern = r"[a-z]+"
 
-country_playlist = {
-    "sweden": "37i9dQZEVXbKVvfnL1Us06",
-    "united states": "37i9dQZEVXbLRQDuF5jeBp",
-    "brazil": "37i9dQZEVXbKzoK95AbRy9",
-    "canada": "37i9dQZEVXbMda2apknTqH",
-    "italy": "37i9dQZEVXbIQnj7RRhdSX",
-    "france": "37i9dQZEVXbKQ1ogMOyW9N",
-    "denmark": "37i9dQZEVXbL3J0k32lWnN",
-    "netherlands": "37i9dQZEVXbKCF6dqVpDkS"
+country_genre = {
+    "sweden": ["Swedish gangsta rap", "swedish hip hop", "swedish trap", "swedish trap pop"],
+    "united states": ["k-pop"],
+    "brazil": ["Agronejo", "arrocha", "musica tocantinense", "sertanejo", "sertanejo universitario"],
+    "canada": ["modern country pop", "pop rap"],
+    "italy": ["Italian pop", "pop virale italiano", "rap genovese"],
+    "france": ['modern country pop', 'pop rap'],
+    "netherlands": ["Art pop", "dance pop", "pop"],
+    "india": ["Desi pop", "hindi indie", "indian indie", "indian singer-songwriter"]
     }
 
 
-def append_country_playlist(country):
-    global country_playlist
+def get_country_playlist(country):
     answer = input (f"Seems that {country} is not in our system. Would you like to add it? [y] for yes: ")
     if answer == "y":
         playlist_id = input(f"Insert playlist ID for {country}: ")
 
         if re.match(playlist_id_pattern, playlist_id):
-            country_playlist[country] = playlist_id
             return playlist_id
 
         else:
             print("Invalid arguments.")
-            return append_country_playlist(country)
+            return get_country_playlist(country)
 
     else:
         print("ending program...")
         return None
 
-def get_country_playlist(lat, long):   
-    global country_playlist
+def get_country_genre(lat, long):   
+    global country_genre
     headers =  {
     'User-Agent': 'gigi',
     'From': 'gicunhads@gmail.com'  
@@ -54,10 +52,10 @@ def get_country_playlist(lat, long):
         print(f"Seems you are in {country}!")
         country = country.lower()
         
-        if country in country_playlist.keys():
-            return country_playlist.get(country)
+        if country in country_genre.keys():
+            return country_genre[country]
         else:
-            return append_country_playlist(country)
+            return get_top_genres(get_top_artists(get_country_playlist(country)))
     
     except ReadTimeout:
         print("Error: Timeout. in get country playlist")
@@ -68,10 +66,10 @@ def get_country_playlist(lat, long):
         if answer == "y":
             country = input("Insert your country: ").lower()
             if re.match(word_pattern, country):
-                if country in country_playlist.keys():
-                    return country_playlist.get(country)
-                elif country not in country_playlist.keys():
-                    return append_country_playlist(country)
+                if country in country_genre.keys():
+                    return country_genre[country]
+                elif country not in country_genre.keys():
+                    return get_country_playlist(country)
         
     
 
@@ -175,11 +173,12 @@ def get_top_genres(csv_artists_id):
 def main():
     digit_pattern = r"-*\d+"   
     lat = input("Insert latitude: ")
-    long = input("Insert longitude: ")
+    long = input("Insert longitude: ") 
     
     if re.match(digit_pattern, lat) and re.match(digit_pattern, long):
         average_temperature = get_average_temp(lat, long)
-        top_genres = get_top_genres(get_top_artists((get_country_playlist(lat, long))))
+        
+        top_genres = get_country_genre(lat, long)
         
         if top_genres != None: 
             print(f"average temperature in this week is {average_temperature}°C")
@@ -189,5 +188,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-
-
