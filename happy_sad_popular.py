@@ -1,6 +1,7 @@
 import requests
 import json
 import re
+import matplotlib.pyplot as plt
 
 #Used chatgpt to get the words for happy and sad songs
 happy_song_words = [
@@ -21,9 +22,8 @@ sad_song_words = [
     "Betray", "Fading"
 ]
 
-lyrics = {
-
-}
+lyrics = {}
+ratios = {}
 
 
 
@@ -44,17 +44,95 @@ def apicall():
     with open('songs.json', 'w') as file:
         json.dump(lyrics, file)
 
-    print(lyrics['Die With A Smile']['lyrics'])
+    with open('spotify.json', 'w') as file1:
+        json.dump(data, file1)
 
 
 def main():
+
     with open('songs.json', 'r') as file:
         lyric = json.load(file)
     for key in lyric:
         if 'error' not in lyric[key]:
-            print(key, lyric[key]['lyrics'])
+
+            amount_happy_word = 0
+            amount_sad_word = 0
+
+            for word in happy_song_words:
+                text = lyric[key]['lyrics']
+                word = word.lower()
+                cases = re.findall( word , text.lower())
+                amount_happy_word += len(cases)
+
+            for word in sad_song_words:
+                text = lyric[key]['lyrics']
+                word = word.lower()
+                cases = re.findall( word , text.lower())
+                amount_sad_word += len(cases)
+
+            if amount_sad_word != 0:
+                ratio = amount_happy_word/amount_sad_word
+            else:
+                ratio = amount_happy_word/1
+
+            ratios[key] = ratio
+
         else:
             continue
+
+    song_names = []
+    song_ratio = []
+    for key in ratios:
+        song_names.append(key)
+        song_ratio.append(ratios[key])
+
+    fig, ax = plt.subplots()
+    ax.bar(song_names, song_ratio)
+    plt.show()
+    avg = sum(song_ratio)/len(song_ratio)
+    print(avg)
+
+    # finding teh median of the ratios to determine when a song is happy or sad.
+    # the median in the first testcase of spotify top 50 was 1.25
+    # so this will be the value used to determine when it is sad or happy
+
+    song_ratio.sort()
+    mid = len(song_ratio) // 2
+    res = (song_ratio[mid] + song_ratio[~mid]) / 2
+    print(res)
+    popularity_of_song = []
+
+    with open('spotify.json', 'r') as file:
+        spotify = json.load(file)
+
+    for i in range(len(song_names)):
+        popularity = spotify['tracks']['items'][i]['track']['popularity']
+        popularity_of_song.append(popularity)
+        #print(f'{song_names[i]} is this popular: {popularity}')
+
+    fig = plt.figure()
+
+    sad_average = []
+    happy_average = []
+
+    for i in range(len(popularity_of_song)):
+        if song_ratio[i] < 1.25:
+            plt.plot(song_ratio[i], popularity_of_song[i], 'bo')
+            sad_average.append(popularity_of_song[i])
+        else:
+            plt.plot(song_ratio[i], popularity_of_song[i], 'ro')
+            happy_average.append(popularity_of_song[i])
+
+    avg_happy = sum(happy_average)/len(happy_average)
+    avg_sad = sum(sad_average)/len(sad_average)
+
+    print(f'the average of happy songs: {avg_happy}, and the average of the sad songs: {avg_sad}')
+
+
+
+    plt.show()
+
+
 
 
 
