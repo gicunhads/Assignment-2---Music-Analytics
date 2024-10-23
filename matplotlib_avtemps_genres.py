@@ -20,7 +20,7 @@ for country, temp in country_temp.items():
 
 
 plt.figure(figsize=(10, 6))
-plt.scatter(temp, number_genres, color="m")
+plt.scatter(temperatures, number_genres, color="m")
 
 
 for i, country in enumerate(countries):
