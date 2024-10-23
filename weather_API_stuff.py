@@ -19,6 +19,16 @@ country_genre = {
     "india": ["Desi pop", "hindi indie", "indian indie", "indian singer-songwriter"]
     }
 
+country_temp = { "sweden":"9.44",
+    "united states": "28.50",
+    "brazil":"27.32",
+    "canada": "10.94",
+    "italy": "28.08",
+    "france": "24.45",
+    "netherlands": "12.15",
+    "india": "28.50"
+
+}
 
 def get_country_playlist(country):
     answer = input (f"Seems that {country} is not in our system. Would you like to add it? [y] for yes: ")
@@ -188,14 +198,19 @@ def main():
             print(f"average temperature in this week is {average_temperature}°C")
             if top_genres != []:
                 country_genre[country] = top_genres
+                country_temp[country] = average_temperature
                 with open(f'./resources/country_genre.json', 'w') as file:
                     json.dump(country_genre, file)
+                with open(f'./resources/country_temp.json', 'w') as file:
+                    json.dump(country_temp, file)
                 print(f"the top genres were {top_genres}")
             
     
 if __name__ == "__main__":
     main()
             
+    
+
     
 
 
