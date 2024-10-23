@@ -3,32 +3,16 @@ from geopy.geocoders import Nominatim
 from requests import ReadTimeout
 geolocator = Nominatim(user_agent="geoapiExercises")
 
+with open(f"./resources/country_genre.json", "r") as file:
+    country_genre = json.load(file)
+
+with open(f'./resources/country_temp.json', 'r') as file:
+    country_temp = json.load(file)
 
 
 playlist_id_pattern = r"[A-Za-z0-9]{22}"
 word_pattern = r"[a-z]+"
 
-country_genre = {
-    "sweden": ["Swedish gangsta rap", "swedish hip hop", "swedish trap", "swedish trap pop"],
-    "united states": ["k-pop"],
-    "brazil": ["Agronejo", "arrocha", "musica tocantinense", "sertanejo", "sertanejo universitario"],
-    "canada": ["modern country pop", "pop rap"],
-    "italy": ["Italian pop", "pop virale italiano", "rap genovese"],
-    "france": ['modern country pop', 'pop rap'],
-    "netherlands": ["Art pop", "dance pop", "pop"],
-    "india": ["Desi pop", "hindi indie", "indian indie", "indian singer-songwriter"]
-    }
-
-country_temp = { "sweden":"9.44",
-    "united states": "28.50",
-    "brazil":"27.32",
-    "canada": "10.94",
-    "italy": "28.08",
-    "france": "24.45",
-    "netherlands": "12.15",
-    "india": "28.50"
-
-}
 
 def get_country_playlist(country):
     answer = input (f"Seems that {country} is not in our system. Would you like to add it? [y] for yes: ")
@@ -58,7 +42,7 @@ def get_country(lat,long):
         return country
     except:
         print(f"Error: Location could not be found.")
-
+        
 def get_country_genre(country):   
     global country_genre
     try:    
