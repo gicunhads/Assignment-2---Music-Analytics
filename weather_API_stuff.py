@@ -1,4 +1,3 @@
-
 import json, re, requests, time
 from geopy.geocoders import Nominatim
 from requests import ReadTimeout
@@ -37,17 +36,22 @@ def get_country_playlist(country):
         print("ending program...")
         return None
 
-def get_country_genre(lat, long):   
-    global country_genre
+def get_country(lat,long):
     headers =  {
     'User-Agent': 'gigi',
-    'From': 'gicunhads@gmail.com'  
-}
+    'From': 'gicunhads@gmail.com' }
     try:    
         location = f"https://nominatim.openstreetmap.org/reverse.php?format=json&lat={lat}&lon={long}&accept-language=en"  
         response_location = requests.get(location, headers=headers, timeout = 5) 
         data_location = response_location.json()
         country = data_location["address"]["country"]
+        return country
+    except:
+        print(f"Error: Location could not be found.")
+
+def get_country_genre(country):   
+    global country_genre
+    try:    
         
         print(f"Seems you are in {country}!")
         country = country.lower()
@@ -179,12 +183,14 @@ def main():
         average_temperature = get_average_temp(lat, long)
         
         top_genres = get_country_genre(lat, long)
-        
+        country = get_country(lat,long)
         if top_genres != None: 
             print(f"average temperature in this week is {average_temperature}°C")
             if top_genres != []:
+                country_genre[country] = top_genres
                 print(f"the top genres were {top_genres}")
             
     
 if __name__ == "__main__":
     main()
+
