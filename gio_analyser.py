@@ -23,6 +23,7 @@ country_genre =  {
 
 
 def main():
+    digit_pattern = r"-*\d+"   
     lat = input("Insert latitude: ")
     long = input("Insert longitude: ") 
     
@@ -30,12 +31,16 @@ def main():
         average_temperature = get_average_temp(lat, long)
         
         top_genres = get_country_genre(lat, long)
-        
+        country = get_country(lat,long)
         if top_genres != None: 
             print(f"average temperature in this week is {average_temperature}°C")
             if top_genres != []:
+                country_genre[country] = top_genres
+                with open(f'./resources/country_genre.json', 'w') as file:
+                    json.dump(country_genre, file)
                 print(f"the top genres were {top_genres}")
             
     
 if __name__ == "__main__":
     main()
+
