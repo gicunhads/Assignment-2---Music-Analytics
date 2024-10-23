@@ -175,15 +175,15 @@ def get_top_genres(csv_artists_id):
 
 
 def main():
-        digit_pattern = r"-*\d+"   
+    digit_pattern = r"-*\d+"   
     lat = input("Insert latitude: ")
     long = input("Insert longitude: ") 
     
     if re.match(digit_pattern, lat) and re.match(digit_pattern, long):
         average_temperature = get_average_temp(lat, long)
         
-        top_genres = get_country_genre(country)
         country = get_country(lat,long)
+        top_genres = get_country_genre(country)
         if top_genres != None: 
             print(f"average temperature in this week is {average_temperature}°C")
             if top_genres != []:
