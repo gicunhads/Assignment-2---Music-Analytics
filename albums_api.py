@@ -2,50 +2,69 @@ import json, requests, time
 
 service = "https://dit009-spotify-assignment.vercel.app/api/v1"
 
+
+
+with open(f'../vsc_kod/assignmenttwo.json', 'r') as file:
+    artists_information = json.load(file)
+
 def artist_id_search(name):
+
     try:
+
+
             artist_search = f"{service}/search?q={name}&type=artist&limit=1"
     
             result = requests.get(artist_search)
             result_data = result.json()
 
 
-            values_dict = {}
+            values = []
             
-
-
-    
-
 
             for item in result_data["artists"]["items"]:
                id = item["id"]
+               print(id)
                artist_name = item["name"]
+               print(artist_name)
                genre = item["genres"]
+               print(genre)
                popularity = item["popularity"]
+               print(popularity)
+            values.append(id)
+            values.append(artist_name)
+            values.append(genre)
+            values.append(popularity)
+               
 
-               values_dict[id] = [artist_name, genre, popularity]
+               
 
                
             right_name = input("Is " + artist_name + " the artist you are looking for? y/n").lower()
             if right_name == "y":
-               return values_dict
+               return values
             elif right_name =="n":
+                
             
-                id = input("Please input the right artist id: ")
+                    id = input("Please input the right artist id: ")
 
                    
-                id_search = f"{service}/artists/{id}"
-                get_id = requests.get(id_search)
-                id_file = get_id.json()
+                    id_search = f"{service}/artists/{id}"
+                    get_id = requests.get(id_search)
+                    id_file = get_id.json()
 
-                values_dict.clear()
+                    values.clear()
+                    
+                    for item in id_file:
+                       artist_name = item["name"]
+                       genre = item["genres"]
+                       popularity = item["popularity"]
 
-                for item in id_file:
-                   artist_name = item["name"]
-                   genre = item["genres"]
-                   popularity = item["popularity"]
+                    values.append(id)
+                    values.append(artist_name)
+                    values.append(genre)
+                    values.append(popularity)
+                    return values
 
-                   values_dict[id] = [artist_name, genre, popularity]
 
                
 
@@ -54,7 +73,7 @@ def artist_id_search(name):
                 return(None)
                
     except KeyError:
-        time.sleep(5)
+        time.sleep(10)
         artist_id_search(name)
 
 
@@ -68,22 +87,30 @@ def artist_albums(id):
         print(total_albums)
         return total_albums
     except KeyError:
-        time.sleep(10)
+        time.sleep(20)
         artist_albums(id)
      
 
 
 def main():
-    artist_name1 = input("Input the first artist name: ")
-    artist_id1 = artist_id_search(artist_name1)
-    album_amount1 = artist_albums(artist_id1)
-    
-
+    artist_name = input("Input the first artist name: ").lower()
+    artist_search = artist_id_search(artist_name)
+    albums = artist_albums((artist_search[0]))
 
     artist_name2 = input("Input the second artist name: ")
-    artist_id2 = artist_id_search(artist_name2)
-    album_amount2 = artist_albums(artist_id2)
-    
+    artist_search2 = artist_id_search(artist_name2)
+    albums2 = artist_albums((artist_search2))
+
+    if artist_search[3] > artist_search2[3]: 
+        print(f"{(artist_search[1])} has {albums} albums and is more popular then {artist_search2[1]} who has {albums2} albums.")
+
+    elif artist_search[3] < artist_search2[3]: 
+        print(f"{(artist_search2[1])} has {albums2} albums and is more popular then {artist_search[1]} who has {albums} albums.")
+
+    elif artist_search[3] == artist_search2[3]: 
+        print(f"{(artist_search[1])} has {albums} albums and equally popular then {artist_search2[1]} who has {albums2} albums.")
+
+
 
 
 if __name__ == "__main__":
