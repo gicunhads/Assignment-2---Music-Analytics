@@ -30,8 +30,8 @@ def main():
     if re.match(digit_pattern, lat) and re.match(digit_pattern, long):
         average_temperature = get_average_temp(lat, long)
         
-        top_genres = get_country_genre(country)
         country = get_country(lat,long)
+        top_genres = get_country_genre(country)
         if top_genres != None: 
             print(f"average temperature in this week is {average_temperature}°C")
             if top_genres != []:
