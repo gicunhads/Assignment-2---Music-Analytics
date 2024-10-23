@@ -46,6 +46,7 @@ def artist_id_search(name):
         if right_name == "y":
             return values
         elif right_name == "n":
+
             id = input("Please input the right artist id: ")
 
             id_search = f"{service}/artists/{id}"
@@ -91,8 +92,13 @@ def artist_albums(id):
 
                 with open('total_albums.json', 'w') as file:
                      json.dump(data, file, indent=4)
-            
-            return(total_albums)
+
+
+                
+
+            return total_albums
+
+                    
         except KeyError:
             time.sleep(15)
             artist_albums(id)
@@ -108,9 +114,17 @@ def main():
     artist_search = artist_id_search(artist_name)
     albums = artist_albums((artist_search[0]))
 
+    if albums == None:
+        albums = artist_albums((artist_search[0]))
+
     artist_name2 = input("Input the second artist name: ").lower()
     artist_search2 = artist_id_search(artist_name2)
     albums2 = artist_albums((artist_search2[0]))
+    
+    if albums2 == None:
+        albums2 = artist_albums((artist_search2[0]))
+
+
 
     if artist_search[3] > artist_search2[3]: 
         print(f"{(artist_search[1])} has {albums} albums and is more popular then {artist_search2[1]} who has {albums2} albums.")
