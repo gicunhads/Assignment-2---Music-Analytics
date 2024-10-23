@@ -177,6 +177,7 @@ def main():
         average_temperature = get_average_temp(lat, long)
         
         country = get_country(lat,long)
+        country = country.lower()
         top_genres = get_country_genre(country)
         if top_genres != None: 
             print(f"average temperature in this week is {average_temperature}°C")
@@ -193,7 +194,6 @@ def main():
 if __name__ == "__main__":
     main()
             
-    
 
 
 
