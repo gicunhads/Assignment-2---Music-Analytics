@@ -171,5 +171,121 @@
             "uk post-punk"
         ],
         "popularity": 80
+    },
+    "cage the elephant": {
+        "id": "26T3LtbuGT1Fu9m0eRq5X3",
+        "artist_name": "Cage The Elephant",
+        "genre": [
+            "modern alternative rock",
+            "modern rock",
+            "pov: indie",
+            "punk blues",
+            "rock"
+        ],
+        "popularity": 76
+    },
+    "interpol": {
+        "id": "3WaJSfKnzc65VDgmj2zU8B",
+        "artist_name": "Interpol",
+        "genre": [
+            "alternative dance",
+            "alternative rock",
+            "indie rock",
+            "indietronica",
+            "modern rock",
+            "rock"
+        ],
+        "popularity": 64
+    },
+    "deftones": {
+        "id": "6Ghvu1VvMGScGpOUJBAHNH",
+        "artist_name": "Deftones",
+        "genre": [
+            "alternative metal",
+            "nu metal",
+            "rap metal",
+            "rock",
+            "sacramento indie"
+        ],
+        "popularity": 81
+    },
+    "slowdive": {
+        "id": "72X6FHxaShda0XeQw3vbeF",
+        "artist_name": "Slowdive",
+        "genre": [
+            "alternative rock",
+            "dream pop",
+            "reading indie",
+            "shoegaze"
+        ],
+        "popularity": 65
+    },
+    "empire of the sun": {
+        "id": "67hb7towEyKvt5Z8Bx306c",
+        "artist_name": "Empire Of The Sun",
+        "genre": [
+            "australian dance",
+            "australian electropop",
+            "dance rock",
+            "indietronica",
+            "neo-synthpop"
+        ],
+        "popularity": 77
+    },
+    "gorillaz": {
+        "id": "3AA28KZvwAUcZuOKwyblJQ",
+        "artist_name": "Gorillaz",
+        "genre": [
+            "alternative hip hop",
+            "modern rock",
+            "rock"
+        ],
+        "popularity": 81
+    },
+    "beach house": {
+        "id": "56ZTgzPBDge0OvCGgMO3OY",
+        "artist_name": "Beach House",
+        "genre": [
+            "art pop",
+            "baltimore indie",
+            "dream pop",
+            "dreamo",
+            "indie rock",
+            "indietronica",
+            "modern dream pop",
+            "pov: indie"
+        ],
+        "popularity": 74
+    },
+    "suki waterhouse": {
+        "id": "5GGJosGMs08YEmKTZJe1fL",
+        "artist_name": "Suki Waterhouse",
+        "genre": [
+            "indie pop"
+        ],
+        "popularity": 72
+    },
+    "artic monkies": {
+        "id": "7Ln80lUS6He07XvHI8qqHH",
+        "artist_name": "Arctic Monkeys",
+        "genre": [
+            "garage rock",
+            "modern rock",
+            "permanent wave",
+            "rock",
+            "sheffield indie"
+        ],
+        "popularity": 88
+    },
+    "the neighbourhood": {
+        "id": "77SW9BnxLY8rJ0RciFqkHh",
+        "artist_name": "The Neighbourhood",
+        "genre": [
+            "modern alternative rock",
+            "modern rock",
+            "pop"
+        ],
+        "popularity": 86
     }
 }
+
