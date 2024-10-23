@@ -89,30 +89,6 @@ def artist_id_search(name):
 def artist_albums(id):
 
     try:
-        
-
-        album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
-        albums = requests.get(album_search)
-        album_file = albums.json()
-        
-        
-        total_albums = []
-
-        for item in album_file["items"]:
-            album_name = item["name"]
-            total_albums.append(album_name)
-        print(len(total_albums))
-
-
-    except KeyError:
-        time.sleep(10)
-        artist_albums2(id)
-
-def artist_albums2(id):
-
-    try:
-        time.sleep(30)
-
         album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
         albums = requests.get(album_search)
         album_file = albums.json()
@@ -129,7 +105,7 @@ def artist_albums2(id):
     except KeyError:
         time.sleep(10)
         artist_albums(id)
-     
+
 
 
 def main():
