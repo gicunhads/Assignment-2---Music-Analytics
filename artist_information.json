@@ -286,6 +286,151 @@
             "pop"
         ],
         "popularity": 86
+    },
+    "drake": {
+        "id": "3TVXtAsR1Inumwj472S9r4",
+        "artist_name": "Drake",
+        "genre": [
+            "canadian hip hop",
+            "canadian pop",
+            "hip hop",
+            "pop rap",
+            "rap"
+        ],
+        "popularity": 96
+    },
+    "kendrick lamar": {
+        "id": "2YZyLoL8N0Wb9xBt1NhZWg",
+        "artist_name": "Kendrick Lamar",
+        "genre": [
+            "conscious hip hop",
+            "hip hop",
+            "rap",
+            "west coast rap"
+        ],
+        "popularity": 92
+    },
+    "depeche mode": {
+        "id": "762310PdDnwsDxAQxzQkfX",
+        "artist_name": "Depeche Mode",
+        "genre": [
+            "dance rock",
+            "new romantic",
+            "new wave",
+            "permanent wave",
+            "rock",
+            "synthpop"
+        ],
+        "popularity": 75
+    },
+    "queen": {
+        "id": "1dfeR4HaWDbWqFHLkxsg1d",
+        "artist_name": "Queen",
+        "genre": [
+            "classic rock",
+            "glam rock",
+            "rock"
+        ],
+        "popularity": 86
+    },
+    "cigaretts after sex": {
+        "id": "1QAJqy2dA3ihHBFIHRphZj",
+        "artist_name": "Cigarettes After Sex",
+        "genre": [
+            "ambient pop",
+            "dream pop",
+            "el paso indie",
+            "shoegaze"
+        ],
+        "popularity": 86
+    },
+    "pearl jam": {
+        "id": "1w5Kfo2jwwIPruYS2UWh56",
+        "artist_name": "Pearl Jam",
+        "genre": [
+            "alternative metal",
+            "alternative rock",
+            "classic rock",
+            "grunge",
+            "hard rock",
+            "permanent wave",
+            "rock"
+        ],
+        "popularity": 76
+    },
+    "eyedress": {
+        "id": "3XxNRirzbjfLdDli06zMaB",
+        "artist_name": "Eyedress",
+        "genre": [
+            "noise pop",
+            "pov: indie"
+        ],
+        "popularity": 77
+    },
+    "mac demarco": {
+        "id": "3Sz7ZnJQBIHsXLUSo0OQtM",
+        "artist_name": "Mac DeMarco",
+        "genre": [
+            "edmonton indie",
+            "lo-fi indie",
+            "pov: indie",
+            "slacker rock"
+        ],
+        "popularity": 82
+    },
+    "mitski": {
+        "id": "2uYWxilOVlUdk4oV9DvwqK",
+        "artist_name": "Mitski",
+        "genre": [
+            "brooklyn indie",
+            "pov: indie"
+        ],
+        "popularity": 84
+    },
+    "lady gaga": {
+        "id": "1HY2Jd0NmPuamShAr6KMms",
+        "artist_name": "Lady Gaga",
+        "genre": [
+            "art pop",
+            "dance pop",
+            "pop"
+        ],
+        "popularity": 92
+    },
+    "childish gambino": {
+        "id": "73sIBHcqh3Z3NyqHKZ7FOL",
+        "artist_name": "Childish Gambino",
+        "genre": [
+            "atl hip hop",
+            "hip hop",
+            "rap"
+        ],
+        "popularity": 81
+    },
+    "bruno mars": {
+        "id": "0du5cEVh5yTK9QJze8zA0C",
+        "artist_name": "Bruno Mars",
+        "genre": [
+            "dance pop",
+            "pop"
+        ],
+        "popularity": 95
+    },
+    "billie eillish": {
+        "id": "6qqNVTkY8uBg9cP3Jd7DAH",
+        "artist_name": "Billie Eilish",
+        "genre": [
+            "art pop",
+            "pop"
+        ],
+        "popularity": 96
+    },
+    "sabrina carpenter": {
+        "id": "74KM79TiuVKeVCqs8QtB0B",
+        "artist_name": "Sabrina Carpenter",
+        "genre": [
+            "pop"
+        ],
+        "popularity": 95
     }
 }
-
