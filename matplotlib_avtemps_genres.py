@@ -16,7 +16,7 @@ for country, genre in country_genre.items():
     number_genres.append(len(genre))
 
 for country, temp in country_temp.items():
-    temperatures.append(temp)
+    temperatures.append(float(temp))
 
 combined = sorted(zip(temperatures, number_genres, countries))
 temperatures, number_genres, countries = zip(*combined)
