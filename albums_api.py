@@ -9,7 +9,7 @@ def artist_id_search(name):
     try:
         
         try:
-            with open('assignmenttwo.json', 'r') as file:
+            with open('artist_information.json', 'r') as file:
                 data = json.load(file)  
         except FileNotFoundError:
             data = {}  
@@ -36,7 +36,7 @@ def artist_id_search(name):
             data[name] = {"id": id, "artist_name": artist_name, "genre": genre, "popularity": popularity}
 
             
-            with open('assignmenttwo.json', 'w') as file:
+            with open('artist_information.json', 'w') as file:
                 json.dump(data, file, indent=4)  
 
         
