@@ -1,3 +1,4 @@
+
 import matplotlib.pyplot as plt
 import json
 
@@ -16,18 +17,21 @@ for country, genre in country_genre.items():
     number_genres.append(len(genre))
 
 for country, temp in country_temp.items():
-    temperatures.append(temp)
+    temperatures.append(float(temp))
 
+combined = sorted(zip(temperatures, number_genres, countries))
+temperatures, number_genres, countries = zip(*combined)
 
 plt.figure(figsize=(10, 6))
 plt.scatter(temperatures, number_genres, color="m")
 
 
-for i, country in enumerate(countries):
-    plt.text(temperatures[i], number_genres[i] + 0.1, country, fontsize=9)
+for temp, num_g, country in combined:
+    plt.text(temp, num_g + 0.1, country, fontsize=9)
 
 plt.title("Average Temp. vs n. of genres per country")
 plt.xlabel("Average Temperature (°C)")
 plt.ylabel("Number of music genres")
 plt.grid(True)
 plt.show()
+
