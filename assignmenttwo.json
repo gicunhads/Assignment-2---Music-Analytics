@@ -1,1 +1,45 @@
-{"taylor swift" : {"id": "06HL4z0CvFAxyc27GXpf02","artist_name": "Taylor Swift","genre": "[pop]","popularity": "100" }}
+{
+    "taylor swift": {
+        "id": "06HL4z0CvFAxyc27GXpf02",
+        "artist_name": "Taylor Swift",
+        "genre": "[pop]",
+        "popularity": "100"
+    },
+    "kanye west": {
+        "id": "5K4W6rqBFWDnAN6FQUkS6x",
+        "artist_name": "Kanye West",
+        "genre": [
+            "chicago rap",
+            "hip hop",
+            "rap"
+        ],
+        "popularity": 93
+    },
+    "the beatles": {
+        "id": "3WrFJ7ztbogyGnTHbHJFl2",
+        "artist_name": "The Beatles",
+        "genre": [
+            "british invasion",
+            "classic rock",
+            "merseybeat",
+            "psychedelic rock",
+            "rock"
+        ],
+        "popularity": 86
+    },
+    "chappel roan": {
+        "id": "7GlBOeep6PqTfFi59PTUUN",
+        "artist_name": "Chappell Roan",
+        "genre": [
+            "indie pop"
+        ],
+        "popularity": 90
+    },
+    "abba": {
+        "id": "0LcJLqbBmaGUft1e9Mm8HV",
+        "artist_name": "ABBA",
+        "genre": [
+            "europop",
+            "swedish pop"
+        ],
+        "popularity": 82
