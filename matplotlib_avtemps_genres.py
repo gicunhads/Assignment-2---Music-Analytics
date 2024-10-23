@@ -18,11 +18,12 @@ for country, genre in country_genre.items():
 for country, temp in country_temp.items():
     temperatures.append(temp)
 
+combined = sorted(zip(temperatures, number_genres, countries))
+temperatures, number_genres, countries = zip(*combined)
 
 plt.figure(figsize=(10, 6))
 plt.scatter(temperatures, number_genres, color="m")
 
-combined = sorted(zip(temperatures, number_genres, countries))
 
 for temp, num_g, country in combined:
     plt.text(temp, num_g + 0.1, country, fontsize=9)
