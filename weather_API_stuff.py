@@ -183,6 +183,7 @@ def main():
             print(f"average temperature in this week is {average_temperature}°C")
             if top_genres != []:
                 country_genre[country] = top_genres
+                top_genres = [genre for sublist in top_genres for genre in sublist]
                 country_temp[country] = average_temperature
                 with open(f'./resources/country_genre.json', 'w') as file:
                     json.dump(country_genre, file)
@@ -194,6 +195,4 @@ def main():
 if __name__ == "__main__":
     main()
             
-
-
-
+    
