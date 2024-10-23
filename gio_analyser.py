@@ -30,7 +30,7 @@ def main():
     if re.match(digit_pattern, lat) and re.match(digit_pattern, long):
         average_temperature = get_average_temp(lat, long)
         
-        top_genres = get_country_genre(lat, long)
+        top_genres = get_country_genre(country)
         country = get_country(lat,long)
         if top_genres != None: 
             print(f"average temperature in this week is {average_temperature}°C")
@@ -39,6 +39,10 @@ def main():
                 with open(f'./resources/country_genre.json', 'w') as file:
                     json.dump(country_genre, file)
                 print(f"the top genres were {top_genres}")
+            
+    
+if __name__ == "__main__":
+    main()
             
     
 if __name__ == "__main__":
