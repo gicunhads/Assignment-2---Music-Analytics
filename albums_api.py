@@ -5,11 +5,6 @@ service = "https://dit009-spotify-assignment.vercel.app/api/v1"
 
 
 
-import json, requests, time
-from requests import ReadTimeout
-
-service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-
 def artist_id_search(name):
     try:
         
@@ -76,18 +71,35 @@ def artist_id_search(name):
 
 
 
-
 def artist_albums(id):
-    
-        album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
-        albums = requests.get(album_search)
-        album_file = albums.json()
-        total_albums = album_file["total"]
-        return(total_albums)
-        
-        
-        
+        try:
+            try:
+                with open('total_albums.json', 'r') as file:
+                    data = json.load(file)  
+            except FileNotFoundError:
+                data = {}
+            if id in data: 
+                total_albums = data[id]
+                return(total_albums)
+            else:
+                album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
+                albums = requests.get(album_search)
+                album_file = albums.json()
+                total_albums = album_file["total"]
 
+                data[id] = total_albums
+
+                with open('total_albums.json', 'w') as file:
+                     json.dump(data, file, indent=4)
+                return(total_albums)
+        except KeyError:
+            time.sleep(15)
+            artist_albums(id)
+
+
+        
+        
+        
 
 
 def main():
@@ -95,7 +107,7 @@ def main():
     artist_search = artist_id_search(artist_name)
     albums = artist_albums((artist_search[0]))
 
-    artist_name2 = input("Input the second artist name: ")
+    artist_name2 = input("Input the second artist name: ").lower()
     artist_search2 = artist_id_search(artist_name2)
     albums2 = artist_albums((artist_search2[0]))
 
