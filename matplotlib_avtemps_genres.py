@@ -1,3 +1,4 @@
+
 import matplotlib.pyplot as plt
 import json
 
@@ -33,3 +34,4 @@ plt.xlabel("Average Temperature (°C)")
 plt.ylabel("Number of music genres")
 plt.grid(True)
 plt.show()
+

@@ -1,0 +1,291 @@
+{
+    "taylor swift": {
+        "id": "06HL4z0CvFAxyc27GXpf02",
+        "artist_name": "Taylor Swift",
+        "genre": "[pop]",
+        "popularity": "100"
+    },
+    "kanye west": {
+        "id": "5K4W6rqBFWDnAN6FQUkS6x",
+        "artist_name": "Kanye West",
+        "genre": [
+            "chicago rap",
+            "hip hop",
+            "rap"
+        ],
+        "popularity": 93
+    },
+    "the beatles": {
+        "id": "3WrFJ7ztbogyGnTHbHJFl2",
+        "artist_name": "The Beatles",
+        "genre": [
+            "british invasion",
+            "classic rock",
+            "merseybeat",
+            "psychedelic rock",
+            "rock"
+        ],
+        "popularity": 86
+    },
+    "chappel roan": {
+        "id": "7GlBOeep6PqTfFi59PTUUN",
+        "artist_name": "Chappell Roan",
+        "genre": [
+            "indie pop"
+        ],
+        "popularity": 90
+    },
+    "abba": {
+        "id": "0LcJLqbBmaGUft1e9Mm8HV",
+        "artist_name": "ABBA",
+        "genre": [
+            "europop",
+            "swedish pop"
+        ],
+        "popularity": 82
+    },
+    "charlie puth": {
+        "id": "6VuMaDnrHyPL1p4EHjYLi7",
+        "artist_name": "Charlie Puth",
+        "genre": [
+            "pop",
+            "viral pop"
+        ],
+        "popularity": 82
+    },
+    "beyonce": {
+        "id": "6vWDO969PvNqNYHIOW5v0m",
+        "artist_name": "Beyonc\u00e9",
+        "genre": [
+            "pop",
+            "r&b"
+        ],
+        "popularity": 87
+    },
+    "blade": {
+        "id": "2xvtxDNInKDV4AvGmjw6d1",
+        "artist_name": "Bladee",
+        "genre": [
+            "cloud rap",
+            "drain",
+            "glitchcore",
+            "underground hip hop"
+        ],
+        "popularity": 70
+    },
+    "daft punk": {
+        "id": "4tZwfgrHOc3mvqYlEYSvVi",
+        "artist_name": "Daft Punk",
+        "genre": [
+            "electro",
+            "filter house",
+            "rock"
+        ],
+        "popularity": 82
+    },
+    "tv girl": {
+        "id": "0Y6dVaC9DZtPNH4591M42W",
+        "artist_name": "TV Girl",
+        "genre": [
+            "pov: indie"
+        ],
+        "popularity": 84
+    },
+    "grimes": {
+        "id": "053q0ukIDRgzwTr4vNSwab",
+        "artist_name": "Grimes",
+        "genre": [
+            "art pop",
+            "canadian electropop",
+            "grave wave",
+            "indietronica",
+            "metropopolis",
+            "neo-synthpop"
+        ],
+        "popularity": 69
+    },
+    "tame impala": {
+        "id": "5INjqkS1o8h1imAzPqGZBb",
+        "artist_name": "Tame Impala",
+        "genre": [
+            "australian psych",
+            "modern rock",
+            "neo-psychedelic",
+            "rock"
+        ],
+        "popularity": 81
+    },
+    "mgmt": {
+        "id": "0SwO7SWeDHJijQ3XNS7xEE",
+        "artist_name": "MGMT",
+        "genre": [
+            "alternative rock",
+            "indie rock",
+            "indietronica",
+            "modern rock",
+            "rock"
+        ],
+        "popularity": 75
+    },
+    "the strokes": {
+        "id": "0epOFNiUfyON9EYx7Tpr6V",
+        "artist_name": "The Strokes",
+        "genre": [
+            "alternative rock",
+            "garage rock",
+            "modern rock",
+            "permanent wave",
+            "rock"
+        ],
+        "popularity": 78
+    },
+    "weaser": {
+        "id": "3jOstUTkEu2JkjvRdBA5Gu",
+        "artist_name": "Weezer",
+        "genre": [
+            "alternative rock",
+            "modern power pop",
+            "modern rock",
+            "permanent wave",
+            "rock"
+        ],
+        "popularity": 76
+    },
+    "madonna": {
+        "id": "6tbjWDEIzxoDsBA1FuhfPW",
+        "artist_name": "Madonna",
+        "genre": [
+            "dance pop",
+            "pop"
+        ],
+        "popularity": 81
+    },
+    "the smiths": {
+        "id": "3yY2gUcIsjMr8hjo51PoJ8",
+        "artist_name": "The Smiths",
+        "genre": [
+            "madchester",
+            "new wave",
+            "permanent wave",
+            "rock",
+            "uk post-punk"
+        ],
+        "popularity": 80
+    },
+    "cage the elephant": {
+        "id": "26T3LtbuGT1Fu9m0eRq5X3",
+        "artist_name": "Cage The Elephant",
+        "genre": [
+            "modern alternative rock",
+            "modern rock",
+            "pov: indie",
+            "punk blues",
+            "rock"
+        ],
+        "popularity": 76
+    },
+    "interpol": {
+        "id": "3WaJSfKnzc65VDgmj2zU8B",
+        "artist_name": "Interpol",
+        "genre": [
+            "alternative dance",
+            "alternative rock",
+            "indie rock",
+            "indietronica",
+            "modern rock",
+            "rock"
+        ],
+        "popularity": 64
+    },
+    "deftones": {
+        "id": "6Ghvu1VvMGScGpOUJBAHNH",
+        "artist_name": "Deftones",
+        "genre": [
+            "alternative metal",
+            "nu metal",
+            "rap metal",
+            "rock",
+            "sacramento indie"
+        ],
+        "popularity": 81
+    },
+    "slowdive": {
+        "id": "72X6FHxaShda0XeQw3vbeF",
+        "artist_name": "Slowdive",
+        "genre": [
+            "alternative rock",
+            "dream pop",
+            "reading indie",
+            "shoegaze"
+        ],
+        "popularity": 65
+    },
+    "empire of the sun": {
+        "id": "67hb7towEyKvt5Z8Bx306c",
+        "artist_name": "Empire Of The Sun",
+        "genre": [
+            "australian dance",
+            "australian electropop",
+            "dance rock",
+            "indietronica",
+            "neo-synthpop"
+        ],
+        "popularity": 77
+    },
+    "gorillaz": {
+        "id": "3AA28KZvwAUcZuOKwyblJQ",
+        "artist_name": "Gorillaz",
+        "genre": [
+            "alternative hip hop",
+            "modern rock",
+            "rock"
+        ],
+        "popularity": 81
+    },
+    "beach house": {
+        "id": "56ZTgzPBDge0OvCGgMO3OY",
+        "artist_name": "Beach House",
+        "genre": [
+            "art pop",
+            "baltimore indie",
+            "dream pop",
+            "dreamo",
+            "indie rock",
+            "indietronica",
+            "modern dream pop",
+            "pov: indie"
+        ],
+        "popularity": 74
+    },
+    "suki waterhouse": {
+        "id": "5GGJosGMs08YEmKTZJe1fL",
+        "artist_name": "Suki Waterhouse",
+        "genre": [
+            "indie pop"
+        ],
+        "popularity": 72
+    },
+    "artic monkies": {
+        "id": "7Ln80lUS6He07XvHI8qqHH",
+        "artist_name": "Arctic Monkeys",
+        "genre": [
+            "garage rock",
+            "modern rock",
+            "permanent wave",
+            "rock",
+            "sheffield indie"
+        ],
+        "popularity": 88
+    },
+    "the neighbourhood": {
+        "id": "77SW9BnxLY8rJ0RciFqkHh",
+        "artist_name": "The Neighbourhood",
+        "genre": [
+            "modern alternative rock",
+            "modern rock",
+            "pop"
+        ],
+        "popularity": 86
+    }
+}
+
