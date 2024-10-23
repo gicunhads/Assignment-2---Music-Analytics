@@ -33,7 +33,7 @@ def artist_id_search(name):
                              
                         new_artist_name = {name : {"id" : id, "artist_name" : artist_name,"genre" : genre, "popularity" : popularity }}
                         out_file = open('assignmenttwo.json', "w")
-                        json.dump(new_artist_name)
+                        json.dump(new_artist_name, out_file)
                         out_file.close()
 
 
