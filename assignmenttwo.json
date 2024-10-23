@@ -43,3 +43,133 @@
             "swedish pop"
         ],
         "popularity": 82
+    },
+    "charlie puth": {
+        "id": "6VuMaDnrHyPL1p4EHjYLi7",
+        "artist_name": "Charlie Puth",
+        "genre": [
+            "pop",
+            "viral pop"
+        ],
+        "popularity": 82
+    },
+    "beyonce": {
+        "id": "6vWDO969PvNqNYHIOW5v0m",
+        "artist_name": "Beyonc\u00e9",
+        "genre": [
+            "pop",
+            "r&b"
+        ],
+        "popularity": 87
+    },
+    "blade": {
+        "id": "2xvtxDNInKDV4AvGmjw6d1",
+        "artist_name": "Bladee",
+        "genre": [
+            "cloud rap",
+            "drain",
+            "glitchcore",
+            "underground hip hop"
+        ],
+        "popularity": 70
+    },
+    "daft punk": {
+        "id": "4tZwfgrHOc3mvqYlEYSvVi",
+        "artist_name": "Daft Punk",
+        "genre": [
+            "electro",
+            "filter house",
+            "rock"
+        ],
+        "popularity": 82
+    },
+    "tv girl": {
+        "id": "0Y6dVaC9DZtPNH4591M42W",
+        "artist_name": "TV Girl",
+        "genre": [
+            "pov: indie"
+        ],
+        "popularity": 84
+    },
+    "grimes": {
+        "id": "053q0ukIDRgzwTr4vNSwab",
+        "artist_name": "Grimes",
+        "genre": [
+            "art pop",
+            "canadian electropop",
+            "grave wave",
+            "indietronica",
+            "metropopolis",
+            "neo-synthpop"
+        ],
+        "popularity": 69
+    },
+    "tame impala": {
+        "id": "5INjqkS1o8h1imAzPqGZBb",
+        "artist_name": "Tame Impala",
+        "genre": [
+            "australian psych",
+            "modern rock",
+            "neo-psychedelic",
+            "rock"
+        ],
+        "popularity": 81
+    },
+    "mgmt": {
+        "id": "0SwO7SWeDHJijQ3XNS7xEE",
+        "artist_name": "MGMT",
+        "genre": [
+            "alternative rock",
+            "indie rock",
+            "indietronica",
+            "modern rock",
+            "rock"
+        ],
+        "popularity": 75
+    },
+    "the strokes": {
+        "id": "0epOFNiUfyON9EYx7Tpr6V",
+        "artist_name": "The Strokes",
+        "genre": [
+            "alternative rock",
+            "garage rock",
+            "modern rock",
+            "permanent wave",
+            "rock"
+        ],
+        "popularity": 78
+    },
+    "weaser": {
+        "id": "3jOstUTkEu2JkjvRdBA5Gu",
+        "artist_name": "Weezer",
+        "genre": [
+            "alternative rock",
+            "modern power pop",
+            "modern rock",
+            "permanent wave",
+            "rock"
+        ],
+        "popularity": 76
+    },
+    "madonna": {
+        "id": "6tbjWDEIzxoDsBA1FuhfPW",
+        "artist_name": "Madonna",
+        "genre": [
+            "dance pop",
+            "pop"
+        ],
+        "popularity": 81
+    },
+    "the smiths": {
+        "id": "3yY2gUcIsjMr8hjo51PoJ8",
+        "artist_name": "The Smiths",
+        "genre": [
+            "madchester",
+            "new wave",
+            "permanent wave",
+            "rock",
+            "uk post-punk"
+        ],
+        "popularity": 80
+    }
+}
