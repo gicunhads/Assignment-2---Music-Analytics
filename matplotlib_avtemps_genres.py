@@ -22,9 +22,10 @@ for country, temp in country_temp.items():
 plt.figure(figsize=(10, 6))
 plt.scatter(temperatures, number_genres, color="m")
 
+combined = sorted(zip(temperatures, number_genres, countries))
 
-for i, country in enumerate(countries):
-    plt.text(temperatures[i], number_genres[i] + 0.1, country, fontsize=9)
+for temp, num_g, country in combined:
+    plt.text(temp, num_g + 0.1, country, fontsize=9)
 
 plt.title("Average Temp. vs n. of genres per country")
 plt.xlabel("Average Temperature (°C)")
