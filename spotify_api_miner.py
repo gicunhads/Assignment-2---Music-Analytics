@@ -34,7 +34,6 @@ def get_lyrics_top50():
             json.dump(data, file1)
 
 
-
 def main():
     get_lyrics_top50()
 

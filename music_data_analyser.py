@@ -21,16 +21,16 @@ def determine_sad_or_happy(choice):
             amount_happy_word = 0
             amount_sad_word = 0
 
-            for word in words['happy_song_words']:
+            for word in words['happy']:
                 text = lyric[key]['lyrics']
                 word = word.lower()
-                cases = re.findall( word , text.lower())
+                cases = re.findall(r'\b' + word + r'\b', text.lower())
                 amount_happy_word += len(cases)
 
-            for word in words['sad_song_words']:
+            for word in words['sad']:
                 text = lyric[key]['lyrics']
                 word = word.lower()
-                cases = re.findall( word , text.lower())
+                cases = re.findall(r'\b' + word + r'\b', text.lower())
                 amount_sad_word += len(cases)
 
             if amount_sad_word != 0:
@@ -51,8 +51,19 @@ def get_average(list_of_nums):
     return avg
 
 
-def plot_happy_or_sad():
-    pass
+def plot_happy_or_sad(happy, sad, choice):
+    data = {
+        'happy' : happy,
+        'sad' : sad
+    }
+    names = list(data.keys())
+    values = list(data.values())
+
+    plt.bar(names, values)
+    plt.ylabel('Average popularity')
+    plt.title('Song popularity based on happy or sad lyrics')
+    plt.savefig(f'./resources/plot_happy_or_sad_in_{choice}.png')
+    plt.show()
 
 
 def happy_or_sad_popular():
@@ -122,9 +133,41 @@ def happy_or_sad_popular():
 
     print(f'Was unable to find lyrics for the following {len(songs_missing_lyrics)} songs: {songs_missing_lyrics}. \nAnd therefore they have been excluded from the data')
 
+    plot_happy_or_sad(avg_happy, avg_sad, choice)
+
+
+def option2():
+    pass
+
+
+def option3():
+    pass
+
 
 def main():
-    happy_or_sad_popular()
+
+    menu = '''
+    Welcome to our music analysis. Here you can choose between three different analysis.
+    1. The correlation between popularity and happy or sad songs.
+    2. xxx
+    3. xxx
+    4. Exit
+    '''
+    print(menu)
+    choice = input('Enter your choice (number between 1 -4): ')
+
+    match choice:
+        case '1':
+            happy_or_sad_popular()
+        case '2':
+            option2()
+        case '3':
+            option3()
+        case '4':
+            print('Thanks for using our music analyzer')
+        case _:
+            print('Please write a valid choice \n')
+            main()
 
 
 if __name__ == "__main__":
