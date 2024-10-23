@@ -9,7 +9,7 @@ def artist_id_search(name):
     try:
         
         try:
-            with open('artist_information.json', 'r') as file:
+            with open('assignmenttwo.json', 'r') as file:
                 data = json.load(file)  
         except FileNotFoundError:
             data = {}  
@@ -36,7 +36,7 @@ def artist_id_search(name):
             data[name] = {"id": id, "artist_name": artist_name, "genre": genre, "popularity": popularity}
 
             
-            with open('artist_information.json', 'w') as file:
+            with open('assignmenttwo.json', 'w') as file:
                 json.dump(data, file, indent=4)  
 
         
@@ -80,7 +80,7 @@ def artist_albums(id):
                 data = {}
             if id in data: 
                 total_albums = data[id]
-                return(total_albums)
+                
             else:
                 album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
                 albums = requests.get(album_search)
@@ -91,7 +91,8 @@ def artist_albums(id):
 
                 with open('total_albums.json', 'w') as file:
                      json.dump(data, file, indent=4)
-                return(total_albums)
+            
+            return(total_albums)
         except KeyError:
             time.sleep(15)
             artist_albums(id)
@@ -119,6 +120,11 @@ def main():
 
     elif artist_search[3] == artist_search2[3]: 
         print(f"{(artist_search[1])} has {albums} albums and equally popular then {artist_search2[1]} who has {albums2} albums.")
+
+
+
+    
+    
 
 
 if __name__ == "__main__":
