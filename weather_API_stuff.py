@@ -168,33 +168,8 @@ def get_top_genres(csv_artists_id):
 
 
 
-def main():
-    digit_pattern = r"-*\d+"   
-    lat = input("Insert latitude: ")
-    long = input("Insert longitude: ") 
-    
-    if re.match(digit_pattern, lat) and re.match(digit_pattern, long):
-        average_temperature = get_average_temp(lat, long)
-        
-        country = get_country(lat,long)
-        country = country.lower()
-        top_genres = get_country_genre(country)
-        if top_genres != None: 
-            print(f"average temperature in this week is {average_temperature}°C")
-            if top_genres != []:
-                top_genres = [genre for sublist in top_genres for genre in sublist]
-                country_genre[country] = []
-                country_genre[country].extend(top_genres)
-                country_temp[country] = average_temperature
-                with open(f'./resources/country_genre.json', 'w') as file:
-                    json.dump(country_genre, file)
-                with open(f'./resources/country_temp.json', 'w') as file:
-                    json.dump(country_temp, file)
-                print(f"the top genres were {top_genres}")
-            
-    
-if __name__ == "__main__":
-    main()
+
+
             
             
     
