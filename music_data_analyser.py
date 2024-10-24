@@ -286,6 +286,7 @@ def plot_albums_popularity():
     plt.ylabel("popularity")
 
     plt.plot(xpoints, ypoints)
+    plt.savefig('./resources/albums_popularity.png')
     plt.show()
 
 

@@ -35,5 +35,15 @@
             "urban contemporary"
         ],
         "popularity": 92
+    },
+    "tessa": {
+        "id": "5DD5GZd4ElmQTy9NleMvKJ",
+        "artist_name": "Tessa Violet",
+        "genre": [
+            "alt z",
+            "indie pop",
+            "pov: indie"
+        ],
+        "popularity": 52
     }
 }
