@@ -286,6 +286,315 @@
             "pop"
         ],
         "popularity": 86
+    },
+    "drake": {
+        "id": "3TVXtAsR1Inumwj472S9r4",
+        "artist_name": "Drake",
+        "genre": [
+            "canadian hip hop",
+            "canadian pop",
+            "hip hop",
+            "pop rap",
+            "rap"
+        ],
+        "popularity": 96
+    },
+    "kendrick lamar": {
+        "id": "2YZyLoL8N0Wb9xBt1NhZWg",
+        "artist_name": "Kendrick Lamar",
+        "genre": [
+            "conscious hip hop",
+            "hip hop",
+            "rap",
+            "west coast rap"
+        ],
+        "popularity": 92
+    },
+    "depeche mode": {
+        "id": "762310PdDnwsDxAQxzQkfX",
+        "artist_name": "Depeche Mode",
+        "genre": [
+            "dance rock",
+            "new romantic",
+            "new wave",
+            "permanent wave",
+            "rock",
+            "synthpop"
+        ],
+        "popularity": 75
+    },
+    "queen": {
+        "id": "1dfeR4HaWDbWqFHLkxsg1d",
+        "artist_name": "Queen",
+        "genre": [
+            "classic rock",
+            "glam rock",
+            "rock"
+        ],
+        "popularity": 86
+    },
+    "cigaretts after sex": {
+        "id": "1QAJqy2dA3ihHBFIHRphZj",
+        "artist_name": "Cigarettes After Sex",
+        "genre": [
+            "ambient pop",
+            "dream pop",
+            "el paso indie",
+            "shoegaze"
+        ],
+        "popularity": 86
+    },
+    "pearl jam": {
+        "id": "1w5Kfo2jwwIPruYS2UWh56",
+        "artist_name": "Pearl Jam",
+        "genre": [
+            "alternative metal",
+            "alternative rock",
+            "classic rock",
+            "grunge",
+            "hard rock",
+            "permanent wave",
+            "rock"
+        ],
+        "popularity": 76
+    },
+    "eyedress": {
+        "id": "3XxNRirzbjfLdDli06zMaB",
+        "artist_name": "Eyedress",
+        "genre": [
+            "noise pop",
+            "pov: indie"
+        ],
+        "popularity": 77
+    },
+    "mac demarco": {
+        "id": "3Sz7ZnJQBIHsXLUSo0OQtM",
+        "artist_name": "Mac DeMarco",
+        "genre": [
+            "edmonton indie",
+            "lo-fi indie",
+            "pov: indie",
+            "slacker rock"
+        ],
+        "popularity": 82
+    },
+    "mitski": {
+        "id": "2uYWxilOVlUdk4oV9DvwqK",
+        "artist_name": "Mitski",
+        "genre": [
+            "brooklyn indie",
+            "pov: indie"
+        ],
+        "popularity": 84
+    },
+    "lady gaga": {
+        "id": "1HY2Jd0NmPuamShAr6KMms",
+        "artist_name": "Lady Gaga",
+        "genre": [
+            "art pop",
+            "dance pop",
+            "pop"
+        ],
+        "popularity": 92
+    },
+    "childish gambino": {
+        "id": "73sIBHcqh3Z3NyqHKZ7FOL",
+        "artist_name": "Childish Gambino",
+        "genre": [
+            "atl hip hop",
+            "hip hop",
+            "rap"
+        ],
+        "popularity": 81
+    },
+    "bruno mars": {
+        "id": "0du5cEVh5yTK9QJze8zA0C",
+        "artist_name": "Bruno Mars",
+        "genre": [
+            "dance pop",
+            "pop"
+        ],
+        "popularity": 95
+    },
+    "billie eilish": {
+        "id": "6qqNVTkY8uBg9cP3Jd7DAH",
+        "artist_name": "Billie Eilish",
+        "genre": [
+            "art pop",
+            "pop"
+        ],
+        "popularity": 96
+    },
+    "sabrina carpenter": {
+        "id": "74KM79TiuVKeVCqs8QtB0B",
+        "artist_name": "Sabrina Carpenter",
+        "genre": [
+            "pop"
+        ],
+        "popularity": 95
+    },
+    "kanye west ": {
+        "id": "5K4W6rqBFWDnAN6FQUkS6x",
+        "artist_name": "Kanye West",
+        "genre": [
+            "chicago rap",
+            "hip hop",
+            "rap"
+        ],
+        "popularity": 93
+    },
+    "jennie": {
+        "id": "250b0Wlc5Vk0CoUsaCY84M",
+        "artist_name": "JENNIE",
+        "genre": [
+            "k-pop"
+        ],
+        "popularity": 82
+    },
+    "one direction": {
+        "id": "4AK6F7OLvEQ5QYCBNiQWHq",
+        "artist_name": "One Direction",
+        "genre": [
+            "boy band",
+            "pop",
+            "post-teen pop",
+            "talent show"
+        ],
+        "popularity": 90
+    },
+    "ariana grande": {
+        "id": "66CXWjxzNUsdJxJ2JdwvnR",
+        "artist_name": "Ariana Grande",
+        "genre": [
+            "pop"
+        ],
+        "popularity": 92
+    },
+    "bolaget": {
+        "id": "55ZGFvikpNjQHvtTWS5aZF",
+        "artist_name": "Bolaget",
+        "genre": [
+            "swedish pop"
+        ],
+        "popularity": 64
+    },
+    "hozier": {
+        "id": "2FXC3k01G6Gw61bmprjgqS",
+        "artist_name": "Hozier",
+        "genre": [
+            "irish singer-songwriter",
+            "modern rock",
+            "pop",
+            "pov: indie"
+        ],
+        "popularity": 86
+    },
+    "post malone": {
+        "id": "246dkjvS1zLTtiykXe5h60",
+        "artist_name": "Post Malone",
+        "genre": [
+            "dfw rap",
+            "melodic rap",
+            "pop",
+            "rap"
+        ],
+        "popularity": 92
+    },
+    "hov1": {
+        "id": "68dW5BU6sdVNf099EylxEt",
+        "artist_name": "Hov1",
+        "genre": [
+            "fotbollslatar",
+            "swedish idol pop",
+            "swedish pop",
+            "swedish pop rap"
+        ],
+        "popularity": 67
+    },
+    "ghost": {
+        "id": "1Qp56T7n950O3EGMsSl81D",
+        "artist_name": "Ghost",
+        "genre": [
+            "hard rock",
+            "metal"
+        ],
+        "popularity": 75
+    },
+    "the 1975": {
+        "id": "3mIj9lX2MWuHmhNCA7LSCW",
+        "artist_name": "The 1975",
+        "genre": [
+            "modern alternative rock",
+            "modern rock",
+            "pop",
+            "pov: indie",
+            "rock"
+        ],
+        "popularity": 78
+    },
+    "the la's": {
+        "id": "47Z8LEl3LnQkcpva0xSthT",
+        "artist_name": "The La's",
+        "genre": [
+            "britpop"
+        ],
+        "popularity": 64
+    },
+    "bon iver": {
+        "id": "4LEiUm1SRbFMgfqnQTwUbQ",
+        "artist_name": "Bon Iver",
+        "genre": [
+            "chamber pop",
+            "eau claire indie",
+            "indie folk",
+            "melancholia",
+            "modern rock"
+        ],
+        "popularity": 79
+    },
+    "george michael": {
+        "id": "19ra5tSw0tWufvUp8GotLo",
+        "artist_name": "George Michael",
+        "genre": [
+            "new wave pop",
+            "soft rock"
+        ],
+        "popularity": 74
+    },
+    "phoebe bridgers": {
+        "id": "1r1uxoy19fzMxunt3ONAkG",
+        "artist_name": "Phoebe Bridgers",
+        "genre": [
+            "indie pop",
+            "la indie",
+            "pov: indie"
+        ],
+        "popularity": 79
+    },
+    "bo burnam": {
+        "id": "2Waw2sSbqvAwK8NwACNjVo",
+        "artist_name": "Bo Burnham",
+        "genre": [
+            "comic",
+            "pov: indie"
+        ],
+        "popularity": 68
+    },
+    "lord huron": {
+        "id": "6ltzsmQQbmdoHHbLZ4ZN25",
+        "artist_name": "Lord Huron",
+        "genre": [
+            "indie folk",
+            "stomp and holler"
+        ],
+        "popularity": 78
+    },
+    "zack bryan": {
+        "id": "40ZNYROS4zLfyyBSs2PGe2",
+        "artist_name": "Zach Bryan",
+        "genre": [
+            "classic oklahoma country"
+        ],
+        "popularity": 91
     }
 }
-
