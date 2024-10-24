@@ -8,9 +8,9 @@ import time
 def get_lyrics_top50():
 
     top50_lists = {
-        'denmark' : '37i9dQZEVXbL3J0k32lWnN',
-        'global' : '37i9dQZEVXbMDoHDwVN2tF',
-        'sweden' : '37i9dQZEVXbLoATJ81JYXz',
+        'denmark': '37i9dQZEVXbL3J0k32lWnN',
+        'global': '37i9dQZEVXbMDoHDwVN2tF',
+        'sweden': '37i9dQZEVXbLoATJ81JYXz',
     }
 
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
@@ -199,7 +199,7 @@ def artist_id_search(name):
     try:
 
         try:
-            with open('artist_information.json', 'r') as file:
+            with open('resources/artist_information.json', 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
             data = {}
@@ -222,7 +222,7 @@ def artist_id_search(name):
 
             data[name] = {"id": id, "artist_name": artist_name, "genre": genre, "popularity": popularity}
 
-            with open('artist_information.json', 'w') as file:
+            with open('resources/artist_information.json', 'w') as file:
                 json.dump(data, file, indent=4)
 
         values = [id, artist_name, genre, popularity]
@@ -262,7 +262,7 @@ def artist_albums(id):
 
     try:
         try:
-            with open('total_albums.json', 'r') as file:
+            with open('resources/total_albums.json', 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
             data = {}
@@ -278,7 +278,7 @@ def artist_albums(id):
 
             data[id] = total_albums
 
-            with open('total_albums.json', 'w') as file:
+            with open('resources/total_albums.json', 'w') as file:
                 json.dump(data, file, indent=4)
         return True
 

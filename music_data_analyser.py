@@ -3,6 +3,8 @@ import re
 import matplotlib.pyplot as plt
 from spotify_api_miner import get_country_genre_temp
 from spotify_api_miner import artist_albums, artist_id_search
+import numpy as np
+
 
 def determine_sad_or_happy(choice):
 
@@ -222,10 +224,10 @@ def option3():
         print('An error happened')
         return None
 
-    with open(f"total_albums.json", "r") as file:
+    with open(f"./resources/total_albums.json", "r") as file:
         albums = json.load(file)
 
-    with open(f"artist_information.json", "r") as file:
+    with open(f"resources/artist_information.json", "r") as file:
         artist_information = json.load(file)
 
     if int(artist_information[artist_search[1].lower()]["popularity"]) > int(artist_information[artist_search2[1].lower()]["popularity"]):
@@ -236,6 +238,54 @@ def option3():
 
     elif int(artist_information[artist_search[1].lower()]["popularity"]) == int(artist_information[artist_search2[1].lower()]["popularity"]):
         print(f"{(artist_search[1])} has {albums[artist_search[0]]} albums and equally popular then {artist_search2[1]} who has {albums[artist_search2[0]]} albums.")
+
+    plot_albums_popularity()
+
+
+def plot_albums_popularity():
+
+    with open('resources/artist_information.json', 'r') as file:
+        data = json.load(file)
+    with open('resources/total_albums.json', 'r') as file1:
+        data1 = json.load(file1)
+
+    popularity = []
+    album_amount = []
+    id_list = []
+    unsorted_list = {}
+
+    for item in data1:
+        id_list.append(item)
+
+    for item in data:
+         name = item
+         artist_popularity = data[name]["popularity"]
+         id = data[name]["id"]
+         if id in id_list:
+             albums = data1.get(id)
+             unsorted_list[albums] = artist_popularity
+
+    myKeys = list(unsorted_list.keys())
+    myKeys.sort()
+
+    sd = {i: unsorted_list[i] for i in myKeys}
+
+    for item in sd:
+        albums = item
+        album_amount.append(albums)
+
+    for item in sd.values():
+        artist_popularity = item
+        popularity.append(artist_popularity)
+
+    xpoints = np.array(album_amount)
+    ypoints = np.array(popularity)
+
+    plt.xlabel("amount of albums")
+    plt.ylabel("popularity")
+
+    plt.plot(xpoints, ypoints)
+    plt.show()
 
 
 def main():
