@@ -1,8 +1,10 @@
-import json, re, requests, time
+import json, re, requests, time, sys
 from geopy.geocoders import Nominatim
 from requests import ReadTimeout
+import sys
 geolocator = Nominatim(user_agent="geoapiExercises")
-from spotify_api_miner import get_top_artists, get_top_genres, get_average_temp, get_country_genre, get_country
+sys.path.append("/Users/giovanacunha/Desktop/Assignment-2---Music-Analytics/weather_API_stuff.py")
+from weather_API_stuff import get_top_artists, get_top_genres, get_average_temp, get_country_genre, get_country
 
 digit_pattern = r"-*\d+"   
 playlist_id_pattern = r"[A-Za-z0-9]{22}"
@@ -29,7 +31,6 @@ def main():
         if top_genres != None: 
             print(f"average temperature in this week is {average_temperature}°C")
             if top_genres != []:
-                top_genres = [genre for sublist in top_genres for genre in sublist]
                 country_genre[country] = []
                 country_genre[country].extend(top_genres)
                 country_temp[country] = average_temperature
@@ -42,6 +43,8 @@ def main():
 if __name__ == "__main__":
     main()
             
+
+
             
 
 
