@@ -1,0 +1,20 @@
+{
+    "taylor swift": {
+        "id": "06HL4z0CvFAxyc27GXpf02",
+        "artist_name": "Taylor Swift",
+        "genre": [
+            "pop"
+        ],
+        "popularity": 100
+    },
+    "kanye west": {
+        "id": "5K4W6rqBFWDnAN6FQUkS6x",
+        "artist_name": "Kanye West",
+        "genre": [
+            "chicago rap",
+            "hip hop",
+            "rap"
+        ],
+        "popularity": 93
+    }
+}

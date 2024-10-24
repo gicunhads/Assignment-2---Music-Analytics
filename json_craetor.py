@@ -1,4 +1,6 @@
 import json
+
+# used ChatGPT to get the top 50 most used words in happy and sad songs in english. swedish and danish
 song_words_combined = {
     "happy": [
         # English happy words

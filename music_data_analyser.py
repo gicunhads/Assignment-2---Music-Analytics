@@ -1,6 +1,7 @@
 import json
 import re
 import matplotlib.pyplot as plt
+from spotify_api_miner import get_top_artists, get_top_genres, get_average_temp, get_country_genre, get_country
 
 
 def determine_sad_or_happy(choice):
@@ -53,8 +54,8 @@ def get_average(list_of_nums):
 
 def plot_happy_or_sad(happy, sad, choice):
     data = {
-        'happy' : happy,
-        'sad' : sad
+        'happy': happy,
+        'sad': sad
     }
     names = list(data.keys())
     values = list(data.values())
@@ -136,8 +137,64 @@ def happy_or_sad_popular():
     plot_happy_or_sad(avg_happy, avg_sad, choice)
 
 
-def option2():
-    pass
+def compare_genre_temperature():
+
+    with open(f"./resources/country_genre.json", "r") as file:
+        country_genre = json.load(file)
+
+    with open(f'./resources/country_temp.json', 'r') as file:
+        country_temp = json.load(file)
+
+    country = list(country_temp.keys())
+    country = country[0]
+    average_temperature = country_temp[country]
+    top_genres = country_genre[country]
+
+    print(f'Showing results for {country.capitalize()}')
+    print(f"average temperature in this week is {average_temperature}°C")
+
+    if top_genres is not []:
+        country_genre[country] = []
+        country_genre[country].extend(top_genres)
+        country_temp[country] = average_temperature
+        print(f"the top genres were {top_genres}")
+
+    plot_genre_temperature()
+
+
+def plot_genre_temperature():
+    with open(f"./resources/all_coutries_genre.json", "r") as file:
+        country_genre = json.load(file)
+
+    with open(f'./resources/all_country_temp.json', 'r') as file:
+        country_temp = json.load(file)
+
+    countries = []
+    temperatures = []
+    number_genres = []
+
+    for country, genre in country_genre.items():
+        countries.append(country)
+        number_genres.append(len(genre))
+
+    for country, temp in country_temp.items():
+        temperatures.append(float(temp))
+
+    combined = sorted(zip(temperatures, number_genres, countries))
+    temperatures, number_genres, countries = zip(*combined)
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(temperatures, number_genres, color="m")
+
+    for temp, num_g, country in combined:
+        plt.text(temp, num_g + 0.1, country, fontsize=9)
+
+    plt.title("Average Temp. vs n. of genres per country")
+    plt.xlabel("Average Temperature (°C)")
+    plt.ylabel("Number of music genres")
+    plt.grid(True)
+    plt.savefig('./resources/averagetemp_vs_number_genre.png')
+    plt.show()
 
 
 def option3():
@@ -149,18 +206,18 @@ def main():
     menu = '''
     Welcome to our music analysis. Here you can choose between three different analysis.
     1. The correlation between popularity and happy or sad songs.
-    2. xxx
+    2. The correlation between temperature and top genres.
     3. xxx
     4. Exit
     '''
     print(menu)
-    choice = input('Enter your choice (number between 1 -4): ')
+    choice = input('Enter your choice (number between 1-4): ')
 
     match choice:
         case '1':
             happy_or_sad_popular()
         case '2':
-            option2()
+            compare_genre_temperature()
         case '3':
             option3()
         case '4':
