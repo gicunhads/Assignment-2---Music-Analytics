@@ -291,10 +291,17 @@ def plot_albums_popularity():
 def main():
 
     menu = '''
-    Welcome to our music analysis. Here you can choose between three different analysis.
+    Have you ever wondered...
+
+    Do positive lyrics tend to lead to more popular songs? 
+    How does the weather influence the genre of music people listen to? 
+    Does having more albums make an artist more popular?
+    
+    Welcome to our music analysis!
+    Here you can choose between three different analysis.
     1. The correlation between popularity and happy or sad songs.
     2. The correlation between temperature and top genres.
-    3. xxx
+    3. The correlation between popularity and number of albums.
     4. Exit
     '''
     print(menu)
