@@ -7,7 +7,13 @@ import sys
 from geopy.geocoders import Nominatim
 geolocator = Nominatim(user_agent="geoapiExercises")
 
+with open(f"./resources/all_countries_genre.json", "r") as file:
+    country_genre = json.load(file)
 
+with open(f'./resources/all_country_temp.json', 'r') as file:
+    country_temp = json.load(file)
+
+    
 def get_lyrics_top50():
 
     top50_lists = {
@@ -226,10 +232,10 @@ def get_country_genre_temp():
                 country_genre[country].extend(top_genres)
                 country_temp[country] = average_temperature
 
-                with open(f'./resources/country_genre.json', 'w') as file:
+                with open(f'./resources/all_countries_genre.json', 'w') as file:
                     json.dump(country_genre, file)
 
-                with open(f'./resources/country_temp.json', 'w') as file:
+                with open(f'./resources/all_country_temp.json', 'w') as file:
                     json.dump(country_temp, file)
 
                 print(f"Data fetched successfully")
