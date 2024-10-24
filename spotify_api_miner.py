@@ -192,15 +192,104 @@ def get_top_genres(csv_artists_id):
         return None
 
 
-def data():
-    pass
+def artist_id_search(name):
+
+    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
+
+    try:
+
+        try:
+            with open('artist_information.json', 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            data = {}
+
+        if name in data:
+            id = data[name]["id"]
+            artist_name = data[name]["artist_name"]
+            genre = data[name]["genre"]
+            popularity = data[name]["popularity"]
+        else:
+            artist_search = f"{service}/search?q={name}&type=artist&limit=1"
+            result = requests.get(artist_search)
+            result_data = result.json()
+
+            for item in result_data["artists"]["items"]:
+                id = item["id"]
+                artist_name = item["name"]
+                genre = item["genres"]
+                popularity = item["popularity"]
+
+            data[name] = {"id": id, "artist_name": artist_name, "genre": genre, "popularity": popularity}
+
+            with open('artist_information.json', 'w') as file:
+                json.dump(data, file, indent=4)
+
+        values = [id, artist_name, genre, popularity]
+        right_name = input(f"Is {artist_name} the artist you are looking for? y/n ").lower()
+
+        if right_name == "y":
+            return values
+
+        elif right_name == "n":
+
+            id = input("Please input the right artist id: ")
+
+            id_search = f"{service}/artists/{id}"
+            get_id = requests.get(id_search)
+            id_file = get_id.json()
+
+            values.clear()
+            for item in id_file:
+                artist_name = item["name"]
+                genre = item["genres"]
+                popularity = item["popularity"]
+
+            values = [id, artist_name, genre, popularity]
+            return True
+        else:
+            print("Error: invalid input")
+            return None
+
+    except KeyError:
+        time.sleep(10)
+        artist_id_search(name)
 
 
-def get_country_genre_temp():
+def artist_albums(id):
+
+    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
+
+    try:
+        try:
+            with open('total_albums.json', 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            data = {}
+
+        if id in data:
+            total_albums = data[id]
+
+        else:
+            album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
+            albums = requests.get(album_search)
+            album_file = albums.json()
+            total_albums = album_file["total"]
+
+            data[id] = total_albums
+
+            with open('total_albums.json', 'w') as file:
+                json.dump(data, file, indent=4)
+        return True
+
+    except KeyError:
+        time.sleep(15)
+        artist_albums(id)
+
+
+def get_country_genre_temp(lat, long):
+
     digit_pattern = r"-*\d+"
-    lat = input("Insert latitude: ")
-    long = input("Insert longitude: ")
-
     country_genre = {}
     country_temp = {}
 
@@ -209,14 +298,12 @@ def get_country_genre_temp():
 
         country = get_country(lat,long)
         country = country.lower()
-        top_genres = get_country_genre(country)
+        top_genres = get_country_genre(country) # returns [[]]
         country = country.title()
-
         if top_genres is not None:
-
             if top_genres is not []:
-
                 country_genre[country] = []
+
                 country_genre[country].extend(top_genres)
                 country_temp[country] = average_temperature
 
@@ -225,18 +312,15 @@ def get_country_genre_temp():
 
                 with open(f'./resources/country_temp.json', 'w') as file:
                     json.dump(country_temp, file)
-
-                print(f"Data fetched successfully")
+                return True
 
 
 def main():
     menu = '''
-    Here you can fetch data from the api's necessary for the analysis.
-    chose which data you want to fetch:
+    Here you can update data from the api's necessary for the analysis.
+    chose which data you want to fetch/update:
     1. Data for whether sad or happy songs are more popular.
-    2. Data for which genres is the most popular in countries
-    3. Data
-    4. Exit
+    2. Exit
     '''
     print(menu)
     choice = input('What do you choose? (choose between 1-4): ')
@@ -245,10 +329,6 @@ def main():
         case '1':
             get_lyrics_top50()
         case '2':
-            get_country_genre_temp()
-        case '3':
-            data()
-        case '4':
             print('thanks for using the program')
         case _:
             print('please choose a valid option')

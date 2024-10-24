@@ -596,5 +596,58 @@
             "classic oklahoma country"
         ],
         "popularity": 91
+    },
+    "dfs": {
+        "id": "18H0sAptzdwid08XGg1Lcj",
+        "artist_name": "Death From Above 1979",
+        "genre": [
+            "canadian rock",
+            "dance-punk",
+            "garage rock",
+            "indietronica",
+            "modern alternative rock",
+            "modern rock"
+        ],
+        "popularity": 49
+    },
+    "9879": {
+        "id": "0yfDh4nMJGcq63eaQo3j7w",
+        "artist_name": "Solsticio 987",
+        "genre": [],
+        "popularity": 25
+    },
+    "taylor": {
+        "id": "06HL4z0CvFAxyc27GXpf02",
+        "artist_name": "Taylor Swift",
+        "genre": [
+            "pop"
+        ],
+        "popularity": 100
+    },
+    "taylor swif": {
+        "id": "06HL4z0CvFAxyc27GXpf02",
+        "artist_name": "Taylor Swift",
+        "genre": [
+            "pop"
+        ],
+        "popularity": 100
+    },
+    "kanye": {
+        "id": "5K4W6rqBFWDnAN6FQUkS6x",
+        "artist_name": "Kanye West",
+        "genre": [
+            "chicago rap",
+            "hip hop",
+            "rap"
+        ],
+        "popularity": 93
+    },
+    "tayulor swift": {
+        "id": "06HL4z0CvFAxyc27GXpf02",
+        "artist_name": "Taylor Swift",
+        "genre": [
+            "pop"
+        ],
+        "popularity": 100
     }
 }

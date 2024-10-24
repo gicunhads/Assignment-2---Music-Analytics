@@ -2,7 +2,11 @@ import requests, json, time
 
 service = "https://dit009-spotify-assignment.vercel.app/api/v1"
 
+
 def artist_id_search(name):
+
+    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
+
     try:
         
         try:
@@ -11,14 +15,12 @@ def artist_id_search(name):
         except FileNotFoundError:
             data = {}  
 
-       
         if name in data:
             id = data[name]["id"]
             artist_name = data[name]["artist_name"]
             genre = data[name]["genre"]
             popularity = data[name]["popularity"]
         else:
-           
             artist_search = f"{service}/search?q={name}&type=artist&limit=1"
             result = requests.get(artist_search)
             result_data = result.json()
@@ -29,19 +31,17 @@ def artist_id_search(name):
                 genre = item["genres"]
                 popularity = item["popularity"]
 
-            
             data[name] = {"id": id, "artist_name": artist_name, "genre": genre, "popularity": popularity}
 
-            
             with open('artist_information.json', 'w') as file:
-                json.dump(data, file, indent=4)  
+                json.dump(data, file, indent=4)
 
-        
         values = [id, artist_name, genre, popularity]
         right_name = input(f"Is {artist_name} the artist you are looking for? y/n ").lower()
 
         if right_name == "y":
             return values
+
         elif right_name == "n":
 
             id = input("Please input the right artist id: ")
@@ -57,7 +57,7 @@ def artist_id_search(name):
                 popularity = item["popularity"]
 
             values = [id, artist_name, genre, popularity]
-            return values
+            return True
         else:
             print("Error: invalid input")
             return None
@@ -67,35 +67,32 @@ def artist_id_search(name):
         artist_id_search(name)
 
 
-
-
 def artist_albums(id):
+
+    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
+
+    try:
         try:
-            try:
-                with open('total_albums.json', 'r') as file:
-                    data = json.load(file)  
-            except FileNotFoundError:
-                data = {}
-            if id in data: 
-                total_albums = data[id]
-                
-            else:
-                album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
-                albums = requests.get(album_search)
-                album_file = albums.json()
-                total_albums = album_file["total"]
+            with open('total_albums.json', 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            data = {}
 
-                data[id] = total_albums
+        if id in data:
+            total_albums = data[id]
 
-                with open('total_albums.json', 'w') as file:
-                     json.dump(data, file, indent=4)
+        else:
+            album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
+            albums = requests.get(album_search)
+            album_file = albums.json()
+            total_albums = album_file["total"]
 
+            data[id] = total_albums
 
-                
+            with open('total_albums.json', 'w') as file:
+                json.dump(data, file, indent=4)
+        return True
 
-            return total_albums
-
-                    
-        except KeyError:
-            time.sleep(15)
-            artist_albums(id)
+    except KeyError:
+        time.sleep(15)
+        artist_albums(id)

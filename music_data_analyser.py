@@ -1,7 +1,8 @@
 import json
 import re
 import matplotlib.pyplot as plt
-
+from spotify_api_miner import get_country_genre_temp
+from spotify_api_miner import artist_albums, artist_id_search
 
 def determine_sad_or_happy(choice):
 
@@ -137,31 +138,39 @@ def happy_or_sad_popular():
 
 
 def compare_genre_temperature():
+    lat = input("Insert latitude: ")
+    long = input("Insert longitude: ")
 
-    with open(f"./resources/country_genre.json", "r") as file:
-        country_genre = json.load(file)
+    valid = get_country_genre_temp(lat, long)
+    if valid is not None:
+        with open('./resources/country_genre.json', 'r') as file:
+            country_genre = json.load(file)
 
-    with open(f'./resources/country_temp.json', 'r') as file:
-        country_temp = json.load(file)
+        with open(f'./resources/all_country_temp.json', 'r') as file:
+            country_temp = json.load(file)
 
-    country = list(country_temp.keys())
-    country = country[0]
-    average_temperature = country_temp[country]
-    top_genres = country_genre[country]
+        country = list(country_genre.keys())[0]
 
-    print(f'Showing results for {country.capitalize()}')
-    print(f"average temperature in this week is {average_temperature}°C")
+        string_of_genres = ''
 
-    if top_genres is not []:
-        country_genre[country] = []
-        country_genre[country].extend(top_genres)
-        country_temp[country] = average_temperature
-        print(f"the top genres were {top_genres}")
+        try:
+            for value in country_genre[country]:
+                if value == country_genre[country][-2]:
+                    string_of_genres += value + 'and '
+                elif value == country_genre[country][-1]:
+                    string_of_genres += value
+                else:
+                    string_of_genres += value + ', '
+        except IndexError:
+            string_of_genres += country_genre[country][0]
 
-    plot_genre_temperature()
+        print(f"the top genres were {string_of_genres}")
+        print(f"average temperature in this week is {country_temp[country.lower()]}°C")
+        plot_genre_temperature()
 
 
 def plot_genre_temperature():
+
     with open(f"./resources/all_coutries_genre.json", "r") as file:
         country_genre = json.load(file)
 
@@ -197,7 +206,36 @@ def plot_genre_temperature():
 
 
 def option3():
-    pass
+    artist_name = input("Input the first artist name: ").lower()
+    artist_search = artist_id_search(artist_name)
+    albums1 = artist_albums((artist_search[0]))
+
+    if albums1 is None:
+        print('An error happened')
+        return None
+
+    artist_name2 = input("Input the second artist name: ").lower()
+    artist_search2 = artist_id_search(artist_name2)
+    albums2 = artist_albums((artist_search2[0]))
+
+    if albums2 is None:
+        print('An error happened')
+        return None
+
+    with open(f"total_albums.json", "r") as file:
+        albums = json.load(file)
+
+    with open(f"artist_information.json", "r") as file:
+        artist_information = json.load(file)
+
+    if int(artist_information[artist_search[1].lower()]["popularity"]) > int(artist_information[artist_search2[1].lower()]["popularity"]):
+        print(f"{artist_search[1]} has {albums[artist_search[0]]} albums and is more popular then {artist_search2[1]} who has {albums[artist_search2[0]]} albums.")
+
+    elif int(artist_information[artist_search[1].lower()]["popularity"]) < int(artist_information[artist_search2[1].lower()]["popularity"]):
+        print(f"{(artist_search2[1])} has {albums[artist_search2[0]]} albums and is more popular then {artist_search[1]} who has {albums[artist_search[0]]} albums.")
+
+    elif int(artist_information[artist_search[1].lower()]["popularity"]) == int(artist_information[artist_search2[1].lower()]["popularity"]):
+        print(f"{(artist_search[1])} has {albums[artist_search[0]]} albums and equally popular then {artist_search2[1]} who has {albums[artist_search2[0]]} albums.")
 
 
 def main():
