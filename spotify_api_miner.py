@@ -3,14 +3,23 @@ import json
 import re
 from requests import ReadTimeout
 import time
+import sys
+from geopy.geocoders import Nominatim
+geolocator = Nominatim(user_agent="geoapiExercises")
 
+with open(f"./resources/all_countries_genre.json", "r") as file:
+    country_genre = json.load(file)
 
+with open(f'./resources/all_country_temp.json', 'r') as file:
+    country_temp = json.load(file)
+
+    
 def get_lyrics_top50():
 
     top50_lists = {
-        'denmark': '37i9dQZEVXbL3J0k32lWnN',
-        'global': '37i9dQZEVXbMDoHDwVN2tF',
-        'sweden': '37i9dQZEVXbLoATJ81JYXz',
+        'denmark' : '37i9dQZEVXbL3J0k32lWnN',
+        'global' : '37i9dQZEVXbMDoHDwVN2tF',
+        'sweden' : '37i9dQZEVXbLoATJ81JYXz',
     }
 
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
@@ -32,7 +41,7 @@ def get_lyrics_top50():
         with open(f'./resources/{key}_songs.json', 'w') as file:
             json.dump(lyrics, file)
 
-        with open(f'./resources/{key}_spotify.json', 'w') as file1:
+        with open(f'./resources/{key}_spotify.json',  'w') as file1:
             json.dump(data, file1)
 
 
@@ -102,6 +111,7 @@ def get_country_genre(country):
                     return get_country_playlist(country)
 
 
+
 def get_average_temp(lat, long):
     try:
         weather = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&past_days=7&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"
@@ -118,6 +128,8 @@ def get_average_temp(lat, long):
     except Exception as e:
         print(f"Error: {e}")
         return None
+
+
 
 
 def get_top_artists(country_playlist):
@@ -193,17 +205,13 @@ def get_top_genres(csv_artists_id):
 
 
 def artist_id_search(name):
-
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-
     try:
-
         try:
-            with open('resources/artist_information.json', 'r') as file:
+            with open('artist_information.json', 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
             data = {}
-
         if name in data:
             id = data[name]["id"]
             artist_name = data[name]["artist_name"]
@@ -213,40 +221,35 @@ def artist_id_search(name):
             artist_search = f"{service}/search?q={name}&type=artist&limit=1"
             result = requests.get(artist_search)
             result_data = result.json()
-
             for item in result_data["artists"]["items"]:
                 id = item["id"]
                 artist_name = item["name"]
                 genre = item["genres"]
                 popularity = item["popularity"]
-
             data[name] = {"id": id, "artist_name": artist_name, "genre": genre, "popularity": popularity}
 
-            with open('resources/artist_information.json', 'w') as file:
+            with open('./resources/artist_information.json', 'w') as file:
                 json.dump(data, file, indent=4)
 
         values = [id, artist_name, genre, popularity]
+
         right_name = input(f"Is {artist_name} the artist you are looking for? y/n ").lower()
 
         if right_name == "y":
-            return values
+            return values[0]
 
         elif right_name == "n":
-
             id = input("Please input the right artist id: ")
-
             id_search = f"{service}/artists/{id}"
             get_id = requests.get(id_search)
             id_file = get_id.json()
-
             values.clear()
             for item in id_file:
                 artist_name = item["name"]
                 genre = item["genres"]
                 popularity = item["popularity"]
-
             values = [id, artist_name, genre, popularity]
-            return True
+            return values[0]
         else:
             print("Error: invalid input")
             return None
@@ -256,40 +259,38 @@ def artist_id_search(name):
         artist_id_search(name)
 
 
+
 def artist_albums(id):
-
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-
     try:
         try:
-            with open('resources/total_albums.json', 'r') as file:
+            with open('total_albums.json', 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
             data = {}
 
         if id in data:
             total_albums = data[id]
-
         else:
             album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
             albums = requests.get(album_search)
             album_file = albums.json()
             total_albums = album_file["total"]
-
             data[id] = total_albums
 
-            with open('resources/total_albums.json', 'w') as file:
+            with open('./resources/total_albums.json', 'w') as file:
                 json.dump(data, file, indent=4)
         return True
-
     except KeyError:
         time.sleep(15)
         artist_albums(id)
 
 
-def get_country_genre_temp(lat, long):
-
+def get_country_genre_temp():
     digit_pattern = r"-*\d+"
+    lat = input("Insert latitude: ")
+    long = input("Insert longitude: ")
+
     country_genre = {}
     country_temp = {}
 
@@ -298,130 +299,41 @@ def get_country_genre_temp(lat, long):
 
         country = get_country(lat,long)
         country = country.lower()
-        top_genres = get_country_genre(country) # returns [[]]
+        top_genres = get_country_genre(country)
         country = country.title()
-        if top_genres is not None:
-            if top_genres is not []:
-                country_genre[country] = []
 
+        if top_genres is not None:
+
+            if top_genres is not []:
+
+                country_genre[country] = []
                 country_genre[country].extend(top_genres)
                 country_temp[country] = average_temperature
 
-                with open(f'./resources/country_genre.json', 'w') as file:
+                with open(f'./resources/all_countries_genre.json', 'w') as file:
                     json.dump(country_genre, file)
 
-                with open(f'./resources/country_temp.json', 'w') as file:
+                with open(f'./resources/all_country_temp.json', 'w') as file:
                     json.dump(country_temp, file)
-                return True
 
+                print(f"Data fetched successfully")
 
-
-def artist_id_search(name):
-    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-    try:
-        
-        try:
-            with open('assignmenttwo.json', 'r') as file:
-                data = json.load(file)  
-        except FileNotFoundError:
-            data = {}  
-
-       
-        if name in data:
-            id = data[name]["id"]
-            artist_name = data[name]["artist_name"]
-            genre = data[name]["genre"]
-            popularity = data[name]["popularity"]
-        else:
-           
-            artist_search = f"{service}/search?q={name}&type=artist&limit=1"
-            result = requests.get(artist_search)
-            result_data = result.json()
-
-            for item in result_data["artists"]["items"]:
-                id = item["id"]
-                artist_name = item["name"]
-                genre = item["genres"]
-                popularity = item["popularity"]
-
-            
-            data[name] = {"id": id, "artist_name": artist_name, "genre": genre, "popularity": popularity}
-
-            
-            with open('assignmenttwo.json', 'w') as file:
-                json.dump(data, file, indent=4)  
-
-        
-        values = [id, artist_name, genre, popularity]
-        right_name = input(f"Is {artist_name} the artist you are looking for? y/n ").lower()
-
-        if right_name == "y":
-            return values
-        elif right_name == "n":
-
-            id = input("Please input the right artist id: ")
-
-            id_search = f"{service}/artists/{id}"
-            get_id = requests.get(id_search)
-            id_file = get_id.json()
-
-            values.clear()
-            for item in id_file:
-                artist_name = item["name"]
-                genre = item["genres"]
-                popularity = item["popularity"]
-
-            values = [id, artist_name, genre, popularity]
-            return values
-        else:
-            print("Error: invalid input")
-            return None
-
-    except KeyError:
-        time.sleep(10)
-        artist_id_search(name)
-
-
-
-
-def artist_albums(id):
-    service = "https://dit009-spotify-assignment.vercel.app/api/v1"
-        try:
-            try:
-                with open('total_albums.json', 'r') as file:
-                    data = json.load(file)  
-            except FileNotFoundError:
-                data = {}
-            if id in data: 
-                total_albums = data[id]
-                
-            else:
-                album_search = f"{service}/artists/{id}/albums?limit=50&include_groups=album"
-                albums = requests.get(album_search)
-                album_file = albums.json()
-                total_albums = album_file["total"]
-
-                data[id] = total_albums
-
-                with open('total_albums.json', 'w') as file:
-                     json.dump(data, file, indent=4)
-
-
-                
-
-            return total_albums
-
-                    
-        except KeyError:
-            time.sleep(15)
-            artist_albums(id)
 
 def main():
     menu = '''
-    Here you can update data from the api's necessary for the analysis.
-    chose which data you want to fetch/update:
+    Have you ever wondered...
+
+    Do positive lyrics tend to lead to more popular songs? 
+    How does the weather influence the genre of music people listen to? 
+    Does having more albums make an artist more popular?
+
+    Here you can fetch data from the api's necessary for the analysis.
+    chose which data you want to fetch:
+    
     1. Data for whether sad or happy songs are more popular.
-    2. Exit
+    2. Data for most popular genres in a week and the average temperature in the same week in your location.
+    3. Data for popularity of an artist and their number of albums.
+    4. Exit
     '''
     print(menu)
     choice = input('What do you choose? (choose between 1-4): ')
@@ -430,7 +342,11 @@ def main():
         case '1':
             get_lyrics_top50()
         case '2':
-            print('thanks for using the program')
+            get_country_genre_temp()
+        case '3':
+            pass
+        case '4':
+            print('Thanks for using the program! Exiting...')
         case _:
             print('please choose a valid option')
             main()
