@@ -1,7 +1,6 @@
 import json
 import re
 import matplotlib.pyplot as plt
-from spotify_api_miner import get_top_artists, get_top_genres, get_average_temp, get_country_genre, get_country
 
 
 def determine_sad_or_happy(choice):

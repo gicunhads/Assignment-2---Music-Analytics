@@ -32,7 +32,7 @@ def get_lyrics_top50():
         with open(f'./resources/{key}_songs.json', 'w') as file:
             json.dump(lyrics, file)
 
-        with open(f'./resources/{key}_spotify.json',  'w') as file1:
+        with open(f'./resources/{key}_spotify.json', 'w') as file1:
             json.dump(data, file1)
 
 
@@ -102,7 +102,6 @@ def get_country_genre(country):
                     return get_country_playlist(country)
 
 
-
 def get_average_temp(lat, long):
     try:
         weather = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&past_days=7&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"
@@ -119,8 +118,6 @@ def get_average_temp(lat, long):
     except Exception as e:
         print(f"Error: {e}")
         return None
-
-
 
 
 def get_top_artists(country_playlist):
