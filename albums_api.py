@@ -22,20 +22,18 @@ def main():
 
 
 
-    if artist_search[3] > artist_search2[3]: 
-        print(f"{(artist_search[1])} has {albums} albums and is more popular then {artist_search2[1]} who has {albums2} albums.")
+    try:
+        if artist_search[3] > artist_search2[3]: 
+            print(f"{(artist_search[1])} mainly produces {artist_search[2]} and has {albums} albums and is more popular then {artist_search2[1]} who mainly produces {artist_search2[2]} and has {albums2} albums.")
 
-    elif artist_search[3] < artist_search2[3]: 
-        print(f"{(artist_search2[1])} has {albums2} albums and is more popular then {artist_search[1]} who has {albums} albums.")
+        elif artist_search[3] < artist_search2[3]: 
+            print(f"{(artist_search2[1])} mainly produces {artist_search2[2]} and has {albums2} albums and is more popular then {artist_search[1]}  mainly produces {artist_search[2]} and and has {albums} albums.")
 
-    elif artist_search[3] == artist_search2[3]: 
-        print(f"{(artist_search[1])} has {albums} albums and equally popular then {artist_search2[1]} who has {albums2} albums.")
-
-
-
-    
-    
-
+        elif artist_search[3] == artist_search2[3]: 
+            print(f"{(artist_search[1])}  mainly produces {artist_search[2]} and has {albums} albums and equally popular then {artist_search2[1]}  mainly produces {artist_search2[2]} and who has {albums2} albums.")
+    except TypeError:
+        print("Error: album amount must be int not str")
+        return None
 
 if __name__ == "__main__":
     main()
