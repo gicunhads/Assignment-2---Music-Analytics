@@ -16,5 +16,24 @@
             "rap"
         ],
         "popularity": 93
+    },
+    "cold play": {
+        "id": "4gzpq5DPGxSnKTe4SA8HAU",
+        "artist_name": "Coldplay",
+        "genre": [
+            "permanent wave",
+            "pop"
+        ],
+        "popularity": 92
+    },
+    "rihanna": {
+        "id": "5pKCCKE2ajJHZ9KAiaK11H",
+        "artist_name": "Rihanna",
+        "genre": [
+            "barbadian pop",
+            "pop",
+            "urban contemporary"
+        ],
+        "popularity": 92
     }
 }

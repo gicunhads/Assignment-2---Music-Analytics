@@ -231,13 +231,13 @@ def option3():
     with open(f"./resources/artist_information.json", "r") as file:
         artist_information = json.load(file)
 
-    if int(artist_information[artist_search[1].lower()]["popularity"]) > int(artist_information[artist_search2[1].lower()]["popularity"]):
+    if artist_search[3] > artist_search2[3]:
         print(f"{artist_search[1]} has {albums[artist_search[0]]} albums and is more popular then {artist_search2[1]} who has {albums[artist_search2[0]]} albums.")
 
-    elif int(artist_information[artist_search[1].lower()]["popularity"]) < int(artist_information[artist_search2[1].lower()]["popularity"]):
+    elif artist_search[3] < artist_search2[3]:
         print(f"{(artist_search2[1])} has {albums[artist_search2[0]]} albums and is more popular then {artist_search[1]} who has {albums[artist_search[0]]} albums.")
 
-    elif int(artist_information[artist_search[1].lower()]["popularity"]) == int(artist_information[artist_search2[1].lower()]["popularity"]):
+    elif artist_search[3] == artist_search2[3]:
         print(f"{(artist_search[1])} has {albums[artist_search[0]]} albums and equally popular then {artist_search2[1]} who has {albums[artist_search2[0]]} albums.")
 
     plot_albums_popularity()

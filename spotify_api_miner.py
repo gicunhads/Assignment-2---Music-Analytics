@@ -208,7 +208,7 @@ def artist_id_search(name):
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
     try:
         try:
-            with open('artist_information.json', 'r') as file:
+            with open('./resources/artist_information.json', 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
             data = {}
@@ -232,12 +232,9 @@ def artist_id_search(name):
                 json.dump(data, file, indent=4)
 
         values = [id, artist_name, genre, popularity]
-
         right_name = input(f"Is {artist_name} the artist you are looking for? y/n ").lower()
-
         if right_name == "y":
-            return values[0]
-
+            return values
         elif right_name == "n":
             id = input("Please input the right artist id: ")
             id_search = f"{service}/artists/{id}"
@@ -249,7 +246,7 @@ def artist_id_search(name):
                 genre = item["genres"]
                 popularity = item["popularity"]
             values = [id, artist_name, genre, popularity]
-            return values[0]
+            return values
         else:
             print("Error: invalid input")
             return None
@@ -264,7 +261,7 @@ def artist_albums(id):
     service = "https://dit009-spotify-assignment.vercel.app/api/v1"
     try:
         try:
-            with open('total_albums.json', 'r') as file:
+            with open('./resources/total_albums.json', 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
             data = {}
