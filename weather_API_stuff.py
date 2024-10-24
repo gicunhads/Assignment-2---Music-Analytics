@@ -15,6 +15,7 @@ word_pattern = r"[a-z]+"
 
 
 def get_country_playlist(country):
+    country = country.title()
     answer = input (f"Seems that {country} is not in our system. Would you like to add it? [y] for yes: ")
     if answer == "y":
         playlist_id = input(f"Insert playlist ID for {country}: ")
@@ -24,6 +25,7 @@ def get_country_playlist(country):
 
         else:
             print("Invalid arguments.")
+            country = country.lower()
             return get_country_playlist(country)
 
     else:
@@ -46,7 +48,7 @@ def get_country(lat,long):
 def get_country_genre(country):   
     global country_genre
     try:    
-        
+        country = country.title()
         print(f"Seems you are in {country}!")
         country = country.lower()
         
@@ -164,6 +166,11 @@ def get_top_genres(csv_artists_id):
         
     else:
         return None
+
+
+
+
+
 
 
 

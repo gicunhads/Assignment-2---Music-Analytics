@@ -18,7 +18,7 @@ with open(f'./resources/country_temp.json', 'r') as file:
     country_temp = json.load(file)
 
 
-def gio_main():  
+def gio_main():
     digit_pattern = r"-*\d+"   
     lat = input("Insert latitude: ")
     long = input("Insert longitude: ") 
@@ -28,26 +28,23 @@ def gio_main():
         
         country = get_country(lat,long)
         country = country.lower()
-        top_genres = get_country_genre(country)
+        top_genres = get_country_genre(country) # returns [[]]
         country = country.title()
         if top_genres is not None:
             print(f"average temperature in this week is {average_temperature}°C")
             if top_genres is not []:
                 country_genre[country] = []
-                country_genre[country].extend(top_genres)
+                for genres in top_genres:
+                    country_genre[country].extend(genres)
                 country_temp[country] = average_temperature
                 with open(f'./resources/country_genre.json', 'w') as file:
                     json.dump(country_genre, file)
                 with open(f'./resources/country_temp.json', 'w') as file:
                     json.dump(country_temp, file)
-                print(f"the top genres were {top_genres}")
-
-
+                print(f"the top genres were {genres}")
+    
 if __name__ == "__main__":
     gio_main()
-            
-
-
             
 
 

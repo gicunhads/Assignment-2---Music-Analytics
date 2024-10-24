@@ -13,6 +13,7 @@ temperatures = []
 number_genres = []
 
 for country, genre in country_genre.items():
+    country = country.title()
     countries.append(country)
     number_genres.append(len(genre))
 
@@ -27,7 +28,7 @@ plt.scatter(temperatures, number_genres, color="m")
 
 
 for temp, num_g, country in combined:
-    plt.text(temp, num_g + 0.1, country, fontsize=9)
+    plt.text(temp, num_g + 0.1, country, fontsize=5)
 
 plt.title("Average Temp. vs n. of genres per country")
 plt.xlabel("Average Temperature (°C)")
