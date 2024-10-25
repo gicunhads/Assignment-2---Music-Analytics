@@ -242,9 +242,9 @@ def artist_id_search(name):
             id_file = get_id.json()
             values.clear()
             for item in id_file:
-                artist_name = item["name"]
-                genre = item["genres"]
-                popularity = item["popularity"]
+                artist_name = id_file["name"]
+                genre = id_file["genres"]
+                popularity = id_file["popularity"]
             values = [id, artist_name, genre, popularity]
             return values
         else:
