@@ -19,6 +19,6 @@ artist_information.json: stores general information like name, id, genre and pop
 total_albums.json: stores information about the total amout of album that is connected to a certain artist id. 
 music_data_analyser.py : analysis the data we get from the api calls  \
 spotify_api_miner.py : retrieves all the information from the api's \
-country_genre.json: stores information of the countries and their popular genre that week \
-country_temp.json: stores information of the average temperature of each country \
+all_countries_genre.json: stores information of the countries and their popular genre that week \
+all_country_temp.json: stores information of the average temperature of each country \
 
