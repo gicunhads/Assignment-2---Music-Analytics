@@ -45,5 +45,25 @@
             "pov: indie"
         ],
         "popularity": 52
+    },
+    "kanye": {
+        "id": "5K4W6rqBFWDnAN6FQUkS6x",
+        "artist_name": "Kanye West",
+        "genre": [
+            "chicago rap",
+            "hip hop",
+            "rap"
+        ],
+        "popularity": 93
+    },
+    "eminim": {
+        "id": "7dGJo4pcD2V6oG8kP0tJRR",
+        "artist_name": "Eminem",
+        "genre": [
+            "detroit hip hop",
+            "hip hop",
+            "rap"
+        ],
+        "popularity": 93
     }
 }
